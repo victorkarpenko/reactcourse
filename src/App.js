@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import List from './components/list'
-import Header from './components/header'
 import './App.css';
+import Header from "./components/header";
 
 const App = () => {
   return (
