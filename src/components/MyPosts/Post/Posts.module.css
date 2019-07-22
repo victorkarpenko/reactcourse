@@ -1,8 +1,9 @@
 .item{
     display: flex;
-    justify-content: space-between;
     width: 500px;
     margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
 }
 
 .avatar{
@@ -19,4 +20,27 @@
     font-size: 15px;
     color: #666;
     line-height: 1.4;
+}
+
+.likes{
+    position: absolute;
+    color: #606770;
+    font-weight: 700;
+    font-size: 14px;
+    bottom: 5px;
+    right: 5px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.likes:before{
+
+
+    content: '';
+    display: inline-block;
+    background: url("https://images.vexels.com/media/users/3/157338/isolated/preview/4952c5bde17896bea3e8c16524cd5485-facebook-like-icon-by-vexels.png");
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }

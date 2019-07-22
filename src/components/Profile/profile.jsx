@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <main className={c.main}>
             <div className={c.img}> My React App</div>
-            <div className={c.profile}>author profile</div>
+            {/*<div className={c.profile}>author profile</div>*/}
             <MyPosts/>
         </main>
     )
