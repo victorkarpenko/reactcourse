@@ -1,0 +1,13 @@
+.header{
+    height: 50px;
+    background-color: #4c547a;
+    padding: 0 15px;
+
+    grid-area: header;
+
+}
+
+
+.logo{
+    max-width: 70px;
+}

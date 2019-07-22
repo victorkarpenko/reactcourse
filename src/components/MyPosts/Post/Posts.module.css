@@ -1,0 +1,22 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.avatar{
+    display: block;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #a7bec4;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.text{
+    font-size: 15px;
+    color: #666;
+    line-height: 1.4;
+}
