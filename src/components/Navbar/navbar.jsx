@@ -5,9 +5,9 @@ const Navbar = () => {
     return(
         <aside className={classes.sidebar}>
             <nav className={classes.navigation}>
-                <a href="/" className={`${classes.item} ${classes.active}`}>home</a>
-                <a href="/order" className={classes.item}>order</a>
-                <a href="/blog" className={classes.item}>blog</a>
+                <a href="/profile" className={`${classes.item} ${classes.active}`}>Profile</a>
+                <a href="/dialogs" className={classes.item}>Dialogs</a>
+                <a href="/settings" className={classes.item}>Settings</a>
             </nav>
         </aside>
     )
