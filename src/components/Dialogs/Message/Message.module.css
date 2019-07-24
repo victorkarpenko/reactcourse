@@ -1,0 +1,22 @@
+.inputMsg{
+    margin-left: 0;
+    margin-right: auto;
+    background-color: #bdbee6;
+}
+
+.outputMsg{
+    margin-right: 0;
+    margin-left: auto;
+    background-color: #6ad3bd;
+}
+
+.msg{
+    display: flex;
+    width: auto;
+    padding: 5px 10px;
+    max-width: 50%;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px ;
+}

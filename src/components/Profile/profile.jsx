@@ -1,11 +1,12 @@
 import React from 'react';
 import c from './profile.module.css';
-import MyPosts from "../MyPosts/MyPosts";
+import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return (
         <div className={c.profile}>
-            <div className={c.img}> My React App</div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     )

@@ -1,0 +1,44 @@
+.user{
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    padding: 8px 15px;
+}
+
+.user:global(.active) {
+    background-color: #d9e2eb;
+}
+
+.user:global(.active):hover {
+    background-color: #d9e2eb;
+}
+
+.user:global(.active) .userName{
+    color: #525070;
+}
+
+
+.user:hover{
+    background-color: #ccd5de;
+}
+
+.avatar{
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #a7bec4;
+    margin-right: 20px;
+    flex-shrink: 0;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png');
+    -webkit-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.userName{
+    font-size: 18px;
+    font-weight: 700;
+    color: #606770;
+}

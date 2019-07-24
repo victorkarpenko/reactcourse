@@ -8,6 +8,20 @@ import Profile from "./components/Profile/profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import Settings from "./components/Settings/Settings";
 
+let dialogs = {
+    dialogsData: [
+        {id: '1', name: 'Viktor'},
+        {id: '2', name: 'Sebek'},
+        {id: '3', name: 'Cotlovan'},
+    ],
+     messagesData: [
+        {id:1, message: 'Hey, how are you', type: 'input'},
+        {id:2, message: 'Hi, a\'im zbs. You?', type: 'output'},
+        {id:2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus repudiandae rerum sapiente suscipit tempora tempore voluptates?', type: 'output'},
+        {id:1, message: 'Okay, thanks for you respond', type: 'input'},
+    ]
+};
+
 const App = () => {
   return (
       <BrowserRouter>
@@ -17,9 +31,9 @@ const App = () => {
 
               <div className="main">
 
-                  <Route path='/dialogs' component={Dialogs} />
-                  <Route path='/(profile|)' component={Profile}/>
-                  <Route path='/settings' component={Settings}/>
+                  <Route path='/dialogs' render={ () => <Dialogs data={dialogs}/> } />
+                  <Route path='/(profile|)' render={ () => <Profile /> }/>
+                  <Route path='/settings' render={ () => <Settings/> }/>
               </div>
           </div>
       </BrowserRouter>
@@ -28,6 +42,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
