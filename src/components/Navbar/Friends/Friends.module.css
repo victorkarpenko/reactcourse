@@ -1,0 +1,36 @@
+.friends{
+    margin-top: 20px;
+    color: white;
+    padding: 0px 5px;
+}
+
+.friends h3{
+    margin-bottom: 8px;
+}
+
+.user{
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    padding: 8px 5px;
+}
+
+.avatar{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #a7bec4;
+    margin-right: 10px;
+    flex-shrink: 0;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png');
+    -webkit-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.userName{
+    font-size: 14px;
+    font-weight: 500;
+}
