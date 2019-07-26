@@ -1,0 +1,44 @@
+.newMessage{
+    width: 100%;
+    padding: 15px;
+    position: relative;
+}
+
+.textarea{
+    resize: none;
+    width: 100%;
+    border: 0;
+    background-color: #ceeaff;
+    border-radius: 50px;
+    height: 40px;
+    overflow: auto;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 15px ;
+    padding-right: 50px;
+
+}
+
+.textarea::placeholder{
+    color: #999;
+}
+
+.textarea::-webkit-scrollbar{
+    display: none;
+}
+
+.sendBtn{
+    position: absolute;
+    right: 30px;
+    top: 23px;
+    z-index: 2;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    border: 0;
+    background: transparent url("https://png.pngtree.com/svg/20160901/f728ea7e9c.svg") no-repeat center center;
+    -webkit-background-size: contain;
+    background-size: contain;
+    box-shadow: none;
+    cursor: pointer;
+}
