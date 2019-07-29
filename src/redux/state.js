@@ -1,3 +1,5 @@
+import {renderApp} from "../render";
+
 let state = {
     messagesPage: {
         dialogs: [
@@ -7,6 +9,46 @@ let state = {
         ],
 
         messages: [
+            {id: 1, message: 'Hey, how are you', type: 'input'},
+            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
+            {
+                id: 2,
+                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
+                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
+                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
+                type: 'output'
+            },
+            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
+            {id: 1, message: 'Hey, how are you', type: 'input'},
+            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
+            {
+                id: 2,
+                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
+                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
+                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
+                type: 'output'
+            },
+            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
+            {id: 1, message: 'Hey, how are you', type: 'input'},
+            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
+            {
+                id: 2,
+                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
+                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
+                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
+                type: 'output'
+            },
+            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
+            {id: 1, message: 'Hey, how are you', type: 'input'},
+            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
+            {
+                id: 2,
+                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
+                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
+                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
+                type: 'output'
+            },
+            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
             {id: 1, message: 'Hey, how are you', type: 'input'},
             {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
             {
@@ -32,6 +74,18 @@ let state = {
             {id: '3', name: 'Cotlovan'},
         ]
     }
+};
+
+export let addPost = (text) =>{
+    let newPost = {
+        id: 5,
+        message: text,
+        likes: 0
+    };
+
+    state.profilePage.posts.push(newPost);
+
+    renderApp(state, addPost);
 };
 
 export default state
