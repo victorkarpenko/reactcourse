@@ -19,47 +19,9 @@ let state = {
                 type: 'output'
             },
             {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
-            {id: 1, message: 'Hey, how are you', type: 'input'},
-            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
-            {
-                id: 2,
-                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
-                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
-                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
-                type: 'output'
-            },
-            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
-            {id: 1, message: 'Hey, how are you', type: 'input'},
-            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
-            {
-                id: 2,
-                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
-                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
-                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
-                type: 'output'
-            },
-            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
-            {id: 1, message: 'Hey, how are you', type: 'input'},
-            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
-            {
-                id: 2,
-                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
-                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
-                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
-                type: 'output'
-            },
-            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
-            {id: 1, message: 'Hey, how are you', type: 'input'},
-            {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
-            {
-                id: 2,
-                message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
-                    'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
-                    'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
-                type: 'output'
-            },
-            {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
-        ]
+
+        ],
+        newMessage: ''
     },
     profilePage: {
         posts: [
@@ -67,6 +29,7 @@ let state = {
             {id: 2, message: 'It\'s my first react app', likes: '102'},
             {id: 3, likes: '8'},
         ],
+        newPostText: 'lolkek',
     },
     sidebar: {
         friends : [
@@ -76,16 +39,40 @@ let state = {
     }
 };
 
-export let addPost = (text) =>{
+export let addPost = () =>{
     let newPost = {
         id: 5,
-        message: text,
+        message: state.profilePage.newPostText,
         likes: 0
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText='';
 
-    renderApp(state, addPost);
+    renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
+};
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
+};
+
+export let updateNewMsg = (newText) =>{
+    state.messagesPage.newMessage = newText;
+    renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
+};
+
+export let sendMsg = () =>{
+    let newMsg = {
+        id: 8,
+        message: state.messagesPage.newMessage,
+        type: 'output'
+    };
+
+    state.messagesPage.messages.push(newMsg);
+    state.messagesPage.newMessage='';
+
+    renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 };
 
 export default state
