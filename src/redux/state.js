@@ -1,4 +1,6 @@
-import {renderApp} from "../render";
+let renderApp = () =>{
+
+};
 
 let state = {
     messagesPage: {
@@ -29,7 +31,7 @@ let state = {
             {id: 2, message: 'It\'s my first react app', likes: '102'},
             {id: 3, likes: '8'},
         ],
-        newPostText: 'lolkek',
+        newPostText: '',
     },
     sidebar: {
         friends : [
@@ -39,7 +41,7 @@ let state = {
     }
 };
 
-export let addPost = () =>{
+export const addPost = () =>{
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -52,17 +54,17 @@ export let addPost = () =>{
     renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 };
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 };
 
-export let updateNewMsg = (newText) =>{
+export const updateNewMsg = (newText) =>{
     state.messagesPage.newMessage = newText;
     renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 };
 
-export let sendMsg = () =>{
+export const sendMsg = () =>{
     let newMsg = {
         id: 8,
         message: state.messagesPage.newMessage,
@@ -73,6 +75,10 @@ export let sendMsg = () =>{
     state.messagesPage.newMessage='';
 
     renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
+};
+
+export const subscribe = (observer) => {
+    renderApp = observer;
 };
 
 export default state

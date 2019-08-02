@@ -16,7 +16,7 @@ const NewMessage = (props) => {
             e.preventDefault();
             onButtonClick();
         }
-    }
+    };
 
   return(
       <div className={c.newMessage}>

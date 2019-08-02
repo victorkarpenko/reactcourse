@@ -1,9 +1,17 @@
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import state, {sendMsg, updateNewMsg} from "./redux/state";
+import state, {sendMsg, subscribe, updateNewMsg} from "./redux/state";
 import {addPost} from "./redux/state";
-import {renderApp} from "./render";
 import {updateNewPostText} from "./redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
+import React from "react";
+
+let renderApp = (state, addPost, updateNewPostText, updateNewMsg, sendMsg) =>{
+    ReactDOM.render(<App state={state} addPost={addPost} updateNewPostText={updateNewPostText} updateNewMsg={updateNewMsg} sendMsg={sendMsg}/>, document.getElementById('root'));
+};
+
+subscribe(renderApp);
 
 renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 
@@ -11,3 +19,4 @@ renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
