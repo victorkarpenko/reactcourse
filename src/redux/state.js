@@ -1,3 +1,5 @@
+
+
 let store = {
     _subscriber(state) {
       console.log('no subscriber');
@@ -48,7 +50,6 @@ let store = {
     },
 
     /**
-     *
      * @param action {type, params}
      */
     dispatch(action){
@@ -87,6 +88,17 @@ let store = {
         this._subscriber(this.getState());
     }
 };
+
+
+const ADD_POST = 'ADD-POST';
+
+export const addPostActionCreator = () => ({type: ADD_POST});
+
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+export const updateNewPostTextActionCreator = (text) =>({
+    type: UPDATE_NEW_POST_TEXT, newText: text
+});
 
 export default store;
 window.store = store;
