@@ -2,7 +2,6 @@ let store = {
     _subscriber(state) {
       console.log('no subscriber');
     },
-
     _state: {
         messagesPage: {
             dialogs: [
@@ -47,18 +46,29 @@ let store = {
     subscribe(observer){
         this._subscriber = observer;
     },
-    addPost(){
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likes: 0
-        };
 
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText='';
+    /**
+     *
+     * @param action {type, params}
+     */
+    dispatch(action){
+        if(action.type === 'ADD-POST'){
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likes: 0
+            };
 
-        this._subscriber(this.getState());
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText='';
+
+            this._subscriber(this.getState());
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText;
+            this._subscriber(this.getState());
+        }
     },
+
     sendMsg(){
         let newMsg = {
             id: 8,
@@ -71,10 +81,7 @@ let store = {
 
         this._subscriber(this.getState());
     },
-    updateNewPostText(newText){
-        this._state.profilePage.newPostText = newText;
-        this._subscriber(this.getState());
-    },
+
     updateNewMsg(newText){
         this._state.messagesPage.newMessage = newText;
         this._subscriber(this.getState());

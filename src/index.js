@@ -6,7 +6,7 @@ import App from "./App";
 import React from "react";
 
 let renderApp = (state) =>{
-    ReactDOM.render(<App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} updateNewMsg={store.updateNewMsg.bind(store)} sendMsg={store.sendMsg.bind(store)}/>, document.getElementById('root'));
+    ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} updateNewMsg={store.updateNewMsg.bind(store)} sendMsg={store.sendMsg.bind(store)}/>, document.getElementById('root'));
 };
 
 store.subscribe(renderApp);
