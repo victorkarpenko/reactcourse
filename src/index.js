@@ -1,19 +1,17 @@
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import state, {sendMsg, subscribe, updateNewMsg} from "./redux/state";
-import {addPost} from "./redux/state";
-import {updateNewPostText} from "./redux/state";
+import store from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 import React from "react";
 
-let renderApp = (state, addPost, updateNewPostText, updateNewMsg, sendMsg) =>{
-    ReactDOM.render(<App state={state} addPost={addPost} updateNewPostText={updateNewPostText} updateNewMsg={updateNewMsg} sendMsg={sendMsg}/>, document.getElementById('root'));
+let renderApp = (state) =>{
+    ReactDOM.render(<App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} updateNewMsg={store.updateNewMsg.bind(store)} sendMsg={store.sendMsg.bind(store)}/>, document.getElementById('root'));
 };
 
-subscribe(renderApp);
+store.subscribe(renderApp);
 
-renderApp(state, addPost, updateNewPostText, updateNewMsg, sendMsg);
+renderApp(store.getState());
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
