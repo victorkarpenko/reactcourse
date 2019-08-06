@@ -1,6 +1,6 @@
 import React from 'react';
 import c from './NewMessage.module.css'
-import {sendMsgActionCreator, updateNewMsgActionCreator} from "../../../redux/state";
+import {sendMsgActionCreator, updateNewMsgActionCreator} from "../../../redux/messages-reducer";
 
 const NewMessage = (props) => {
 

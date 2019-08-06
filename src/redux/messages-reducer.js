@@ -1,6 +1,7 @@
+const SEND_MSG = 'SEND-MSG';
+const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
+
 const messagesReducer = (state, action) =>{
-    const SEND_MSG = 'SEND-MSG';
-    const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
 
     switch (action.type) {
         case SEND_MSG:
@@ -23,5 +24,12 @@ const messagesReducer = (state, action) =>{
             return state;
     }
 };
+
+export const sendMsgActionCreator = () => ({type: SEND_MSG});
+
+export const updateNewMsgActionCreator = (text) =>({
+    type: UPDATE_NEW_MSG, newText: text
+});
+
 
 export default messagesReducer;

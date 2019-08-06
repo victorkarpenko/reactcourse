@@ -4,11 +4,6 @@ import profileReducer from "./profile-reducer";
 import messagesReducer from "./messages-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-const ADD_POST = 'ADD-POST';
-const SEND_MSG = 'SEND-MSG';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
-
 let store = {
     _subscriber(state) {
       console.log('no subscriber');
@@ -67,20 +62,6 @@ let store = {
         this._subscriber(this.getState());
     },
 };
-
-//action creators
-
-export const addPostActionCreator = () => ({type: ADD_POST});
-
-export const updateNewPostTextActionCreator = (text) =>({
-    type: UPDATE_NEW_POST_TEXT, newText: text
-});
-
-export const sendMsgActionCreator = () => ({type: SEND_MSG});
-
-export const updateNewMsgActionCreator = (text) =>({
-    type: UPDATE_NEW_MSG, newText: text
-});
 
 
 export default store;
