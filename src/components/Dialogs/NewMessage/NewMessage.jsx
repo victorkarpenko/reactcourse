@@ -1,15 +1,15 @@
 import React from 'react';
 import c from './NewMessage.module.css'
+import {sendMsgActionCreator, updateNewMsgActionCreator} from "../../../redux/state";
 
 const NewMessage = (props) => {
-    const newMessage = React.createRef();
 
     const onButtonClick = () => {
-        props.sendMsg();
+        props.dispatch(sendMsgActionCreator());
     };
-    const onMsgChange = () =>{
-        const text = newMessage.current.value;
-        props.updateNewMsg(text);
+    const onMsgChange = (e) =>{
+        const text = e.target.value;
+        props.dispatch(updateNewMsgActionCreator(text));
     };
     const onEnterPress = (e) =>{
         if(e.keyCode === 13 && e.shiftKey === false) {
@@ -20,7 +20,7 @@ const NewMessage = (props) => {
 
   return(
       <div className={c.newMessage}>
-          <textarea onKeyDown={onEnterPress} onChange={onMsgChange} ref={newMessage} name="" id="" cols="30" rows="10" className={c.textarea} value={props.newMsg} placeholder="Enter new message"></textarea>
+          <textarea onKeyDown={onEnterPress} onChange={onMsgChange} className={c.textarea} value={props.newMsg} placeholder="Enter new message"></textarea>
           <button className={c.sendBtn} onClick={onButtonClick}></button>
       </div>
   )
