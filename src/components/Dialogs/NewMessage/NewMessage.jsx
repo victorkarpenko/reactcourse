@@ -1,15 +1,14 @@
 import React from 'react';
 import c from './NewMessage.module.css'
-import {sendMsgActionCreator, updateNewMsgActionCreator} from "../../../redux/messages-reducer";
 
 const NewMessage = (props) => {
 
     const onButtonClick = () => {
-        props.dispatch(sendMsgActionCreator());
+        props.sendMsg();
     };
     const onMsgChange = (e) =>{
         const text = e.target.value;
-        props.dispatch(updateNewMsgActionCreator(text));
+        props.updateNewMsg(text);
     };
     const onEnterPress = (e) =>{
         if(e.keyCode === 13 && e.shiftKey === false) {
