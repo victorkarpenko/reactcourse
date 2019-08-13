@@ -39,10 +39,10 @@ const messagesReducer = (state = initialState, action) =>{
                 state.messages.push(newMsg);
                 state.newMessage='';
             }
-            return state;
+            return Object.assign({}, state);
         case UPDATE_NEW_MSG:
-            state.newMessage = action.newText;
-            return state;
+            //state.newMessage = action.newText;
+            return Object.assign({}, state, {newMessage: action.newText});
         default:
             return state;
     }

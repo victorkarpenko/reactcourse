@@ -4,7 +4,7 @@ import profileReducer from "./profile-reducer";
 import messagesReducer from "./messages-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-let store = {
+let storeDEPRICATED = {
     _subscriber(state) {
       console.log('no subscriber');
     },
@@ -66,5 +66,5 @@ let store = {
 };
 
 
-export default store;
-window.store = store;
+export default storeDEPRICATED;
+window.store = storeDEPRICATED;

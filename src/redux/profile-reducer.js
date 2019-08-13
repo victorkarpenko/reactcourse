@@ -25,10 +25,9 @@ const profileReducer = (state = initialState, action) =>{
                 state.posts.push(newPost);
                 state.newPostText='';
             }
-            return state;
+            return Object.assign({}, state);
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            return Object.assign({}, state, {newPostText: action.newText});
         default:  return state;
 
     }
