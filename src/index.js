@@ -4,9 +4,15 @@ import store from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import App from "./App";
 import React from "react";
+import {Provider} from "./StoreContext";
 
 let renderApp = (state) =>{
-    ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} store={store}/>, document.getElementById('root'));
+    ReactDOM.render(
+        <Provider store={store}>
+            <App state={state} />
+        </Provider>,
+        document.getElementById('root'))
+    ;
 };
 
 store.subscribe(() => {

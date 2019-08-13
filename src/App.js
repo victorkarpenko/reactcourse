@@ -9,6 +9,8 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
+
+
 const App = (props) => {
   return (
       <BrowserRouter>
@@ -18,8 +20,8 @@ const App = (props) => {
 
               <div className="main">
 
-                  <Route path='/dialogs' render={ () => <DialogsContainer store={props.store}/> } />
-                  <Route path='/(profile|)' render={ () => <Profile store={props.store} /> }/>
+                  <Route path='/dialogs' render={ () => <DialogsContainer/> } />
+                  <Route path='/(profile|)' render={ () => <Profile/> }/>
                   <Route path='/settings' render={ () => <Settings/> }/>
               </div>
           </div>
