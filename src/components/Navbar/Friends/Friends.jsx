@@ -4,7 +4,7 @@ import c from './Friends.module.css'
 const Friends = (props) => {
     const items = props.friends.map((elem) => {
         return(
-            <div className={c.user}>
+            <div className={c.user} key={elem.id}>
                 <div className={c.avatar}>
 
                 </div>

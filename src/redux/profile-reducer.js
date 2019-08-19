@@ -11,7 +11,6 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) =>{
-
     switch (action.type) {
         case ADD_POST:
             const prevID = state.posts[state.posts.length - 1].id;
@@ -21,15 +20,19 @@ const profileReducer = (state = initialState, action) =>{
                 likes: 0
             };
 
-            if(newPost.message !== ''){
-                state.posts.push(newPost);
-                state.newPostText='';
-            }
-            return Object.assign({}, state);
-        case UPDATE_NEW_POST_TEXT:
-            return Object.assign({}, state, {newPostText: action.newText});
-        default:  return state;
+            let newState;
 
+            if(newPost.message !== ''){
+                newState = {
+                    ...state,
+                    posts: [...state.posts, newPost],
+                    newPostText: ''
+                }
+            }
+            return newState;
+        case UPDATE_NEW_POST_TEXT:
+            return {...state, newPostText: action.newText};
+        default:  return state;
     }
 };
 

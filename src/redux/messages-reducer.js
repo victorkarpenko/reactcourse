@@ -12,19 +12,20 @@ let initialState ={
         {id: 1, message: 'Hey, how are you', type: 'input'},
         {id: 2, message: 'Hi, a\'im zbs. You?', type: 'output'},
         {
-            id: 2,
+            id: 3,
             message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis ' +
                 'eaque explicabo illum itaque iure laboriosam libero modi, odio quisquam quos repellendus ' +
                 'repudiandae rerum sapiente suscipit tempora tempore voluptates?',
             type: 'output'
         },
-        {id: 1, message: 'Okay, thanks for you respond', type: 'input'},
+        {id: 4, message: 'Okay, thanks for you respond', type: 'input'},
 
     ],
     newMessage: ''
 };
 
 const messagesReducer = (state = initialState, action) =>{
+
 
     switch (action.type) {
         case SEND_MSG:
@@ -35,14 +36,17 @@ const messagesReducer = (state = initialState, action) =>{
                 type: 'output'
             };
 
+            let newState;
             if (newMsg.message !== ''){
-                state.messages.push(newMsg);
-                state.newMessage='';
+                newState = {
+                    ...state,
+                    newMessage: '',
+                    messages: [...state.messages, newMsg]
+                };
             }
-            return Object.assign({}, state);
+            return newState;
         case UPDATE_NEW_MSG:
-            //state.newMessage = action.newText;
-            return Object.assign({}, state, {newMessage: action.newText});
+            return {...state, newMessage: action.newText};
         default:
             return state;
     }
