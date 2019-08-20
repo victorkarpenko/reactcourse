@@ -10,6 +10,7 @@ const Navbar = (props) => {
                 <NavLink to='/profile' className={classes.item} activeClassName={classes.active}> Profile</NavLink>
                 <NavLink to="/dialogs" className={classes.item} activeClassName={classes.active}>Dialogs</NavLink>
                 <NavLink to="/settings" className={classes.item} activeClassName={classes.active}>Settings</NavLink>
+                <NavLink to="/users" className={classes.item} activeClassName={classes.active}>Users</NavLink>
             </nav>
             <Friends friends={props.sidebar.friends}/>
         </aside>
