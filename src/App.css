@@ -26,6 +26,8 @@ a:hover{
 
 .main{
   grid-area: main;
+  max-height: calc(100vh - 50px);
+  overflow: auto;
 }
 
 .App-logo {
