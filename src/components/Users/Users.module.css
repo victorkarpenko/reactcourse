@@ -62,3 +62,22 @@
 .user__right{
     padding-top: 30px;
 }
+
+.pagination{
+    display: flex;
+    justify-content: flex-start;
+    padding: 30px 30px 0;
+    flex-wrap: wrap;
+}
+
+.pagination__link{
+    font-size: 18px;
+    display: block;
+    min-width: 15px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.pagination__link_active{
+    font-weight: 700;
+}
