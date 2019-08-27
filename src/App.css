@@ -59,3 +59,46 @@ a:hover{
     transform: rotate(360deg);
   }
 }
+
+.icons{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon{
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+  background-size: contain;
+  background-position: center center;
+
+  margin-right: 5px;
+}
+
+.icon:last-child{
+  margin-right: 0;
+}
+
+.icon--facebook{
+  background-image: url('assets/images/icons/facebook.png');
+}
+.icon--github{
+  background-image: url('assets/images/icons/github.png');
+}
+.icon--vk{
+  background-image: url('assets/images/icons/vk.png');
+}
+.icon--instagram{
+  background-image: url('assets/images/icons/instagram.png');
+}
+.icon--twitter{
+  background-image: url('assets/images/icons/twitter.png');
+}
+.icon--youtube{
+  background-image: url('assets/images/icons/youtube.png');
+}
+.icon--website{
+  background-image: url('assets/images/icons/website.png');
+}

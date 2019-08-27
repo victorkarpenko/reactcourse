@@ -11,3 +11,32 @@
     font-weight: 700;
     color: rgba(255, 255, 255, 0.5);
 }
+
+.userProfile{
+    display: flex;
+    padding: 20px;
+}
+
+.userProfile__fullname{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.userProfile img{
+    width: 150px;
+    border-radius: 50%;
+}
+
+.userProfile__info{
+    padding-left: 15px;
+}
+
+
+.userProfile__contacts{
+    margin-top: 20px;
+}
+
+.userProfile__contacts a{
+    color: black;
+    margin-bottom: 2px;
+}
