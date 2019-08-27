@@ -1,0 +1,12 @@
+.preloaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.preloader{
+    width: 150px;
+}
