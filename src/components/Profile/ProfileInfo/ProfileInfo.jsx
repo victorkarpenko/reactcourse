@@ -2,6 +2,7 @@ import React from 'react';
 import c from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import avatar from '../../../assets/images/avatar.png';
+import lookingIcon from '../../../assets/images/lookingJobIcon.png'
 
 const ProfileInfo = (props) => {
     if(!props.userProfile) {
@@ -20,19 +21,24 @@ const ProfileInfo = (props) => {
             <div>
                 <div className={c.img}> My React App</div>
                 <div className={c.userProfile}>
-                    <img src={props.userProfile.photos.large ? props.userProfile.photos.large : avatar} alt=""/>
+                    <img className={c.userProfile__avatar} src={props.userProfile.photos.large ? props.userProfile.photos.large : avatar} alt=""/>
                     <div className={c.userProfile__info}>
                         <div className={c.userProfile__fullname}>
                             {props.userProfile.fullName}
                         </div>
                         <div className={c.userProfile__contacts}>
-                            <div className="icons">
-                                {
-                                    contactsJSX
-                                }
-                            </div>
+                            {!!contactsJSX.length ?
+                                <div className="icons">
+                                    {
+                                        contactsJSX
+                                    }
+                                </div>
+                                : null
+                            }
                         </div>
-
+                        {props.userProfile.lookingForAJob ? <div className={c.userProfile__jobInfo}>
+                            <img src={lookingIcon} alt="" className={c.userProfile__lookingIcon}/>
+                            {props.userProfile.lookingForAJobDescription}</div> : null}
                     </div>
 
                 </div>

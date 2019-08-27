@@ -22,7 +22,7 @@
     font-weight: 700;
 }
 
-.userProfile img{
+.userProfile__avatar{
     width: 150px;
     border-radius: 50%;
 }
@@ -39,4 +39,16 @@
 .userProfile__contacts a{
     color: black;
     margin-bottom: 2px;
+}
+
+.userProfile__jobInfo{
+    margin-top: 10px;
+    color: grey;
+    vertical-align: middle;
+    font-style: italic;
+}
+
+.userProfile__lookingIcon{
+    width: 15px;
+    margin-right: 8px;
 }
