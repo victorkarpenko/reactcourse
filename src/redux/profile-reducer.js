@@ -22,9 +22,9 @@ const profileReducer = (state = initialState, action) =>{
                 likes: 0
             };
 
-            let newState;
+            let newState = {...state};
 
-            if(newPost.message !== ''){
+            if(!!state.newPostText){
                 newState = {
                     ...state,
                     posts: [...state.posts, newPost],

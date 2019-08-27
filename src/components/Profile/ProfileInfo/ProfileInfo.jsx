@@ -1,6 +1,7 @@
 import React from 'react';
 import c from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
+import avatar from '../../../assets/images/avatar.png';
 
 const ProfileInfo = (props) => {
     if(!props.userProfile) {
@@ -11,7 +12,7 @@ const ProfileInfo = (props) => {
         for (var key in contactsLinks){
             if(contactsLinks[key]){
                 let classes= "icon icon--" + key;
-                contactsJSX.push(<a href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}></a>);
+                contactsJSX.push(<a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}></a>);
             }
         }
 
@@ -19,7 +20,7 @@ const ProfileInfo = (props) => {
             <div>
                 <div className={c.img}> My React App</div>
                 <div className={c.userProfile}>
-                    <img src={props.userProfile.photos.large} alt=""/>
+                    <img src={props.userProfile.photos.large ? props.userProfile.photos.large : avatar} alt=""/>
                     <div className={c.userProfile__info}>
                         <div className={c.userProfile__fullname}>
                             {props.userProfile.fullName}

@@ -20,7 +20,7 @@ let Users = (props) => {
                 {
                     props.users.map(u => <div className={c.user} key={u.id}>
                         <div className={c.user__left}>
-                            <NavLink to={'/profile/id' + u.id}>
+                            <NavLink to={'/profile/' + u.id}>
                                 <img className={c.user__avatar} src={u.photos.small !== null ? u.photos.small : avatar} alt=""/>
                             </NavLink>
                             {u.followed ?  <button onClick={()=>{props.unfollow(u.id)}} className={c.user__button}>Unfollow</button> :  <button onClick={()=>{props.follow(u.id)}} className={c.user__button}>Follow</button>}

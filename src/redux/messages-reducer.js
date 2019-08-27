@@ -36,7 +36,7 @@ const messagesReducer = (state = initialState, action) =>{
                 type: 'output'
             };
 
-            let newState;
+            let newState={...state};
             if (newMsg.message !== ''){
                 newState = {
                     ...state,
