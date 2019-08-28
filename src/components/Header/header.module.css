@@ -2,12 +2,20 @@
     height: 50px;
     background-color: #4c547a;
     padding: 0 15px;
-
+    display: flex;
+    justify-content: space-between;
     grid-area: header;
-
 }
 
 
 .logo{
     max-width: 70px;
+}
+
+.loginBlock{
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
