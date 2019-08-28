@@ -2,7 +2,7 @@ import React from 'react';
 import c from "./Users.module.css";
 import avatar from "../../assets/images/avatar.png";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+import {followAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -12,33 +12,27 @@ let Users = (props) => {
         pagesNumbers.push(i);
     }
 
-    let ajaxOptions = {
-        withCredentials: true,
-        headers:
-            {"API-KEY" : "544dd9f7-91a0-4b76-8372-bd0d5a461fe8"}
-    };
-
     let onFollow = (id) =>{
 
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, ajaxOptions).then(response => {
-            if(response.data.resultCode === 0){
+        followAPI.follow(id).then(data => {
+            if(data.resultCode === 0){
                 props.follow(id);
             }
         });
     };
 
     let onUnfollow = (id) =>{
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, ajaxOptions).then(response => {
-            if(response.data.resultCode === 0){
+        followAPI.unfollow(id).then(data => {
+            if(data.resultCode === 0){
                 props.unfollow(id);
             }
         });
-    }
+    };
 
     return (
         <>
             <div className={c.pagination}>
-                {pagesNumbers.map(p => <span onClick={() => {props.onPageChanged(p)}} className={props.currentPage===p ? c.pagination__link_active + ' ' + c.pagination__link : c.pagination__link}>{p}</span> )}
+                {pagesNumbers.map(p => <span key={p} onClick={() => {props.onPageChanged(p)}} className={props.currentPage===p ? c.pagination__link_active + ' ' + c.pagination__link : c.pagination__link}>{p}</span> )}
             </div>
             <div className={c.users}>
                 {
