@@ -2,7 +2,6 @@ import React from 'react';
 import c from "./Users.module.css";
 import avatar from "../../assets/images/avatar.png";
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -12,26 +11,6 @@ let Users = (props) => {
         pagesNumbers.push(i);
     }
 
-    let onFollow = (id) =>{
-        props.toggleFollowingInProgress(true, id);
-
-        followAPI.follow(id).then(data => {
-            if(data.resultCode === 0){
-                props.follow(id);
-                props.toggleFollowingInProgress(false, id);
-            }
-        });
-    };
-
-    let onUnfollow = (id) =>{
-        props.toggleFollowingInProgress(true, id);
-        followAPI.unfollow(id).then(data => {
-            if(data.resultCode === 0){
-                props.unfollow(id);
-                props.toggleFollowingInProgress(false, id);
-            }
-        });
-    };
 
 
     return (
@@ -46,7 +25,7 @@ let Users = (props) => {
                             <NavLink to={'/profile/' + u.id}>
                                 <img className={c.user__avatar} src={u.photos.small !== null ? u.photos.small : avatar} alt=""/>
                             </NavLink>
-                            {u.followed ?  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{onUnfollow(u.id)}} className={c.user__button}>Unfollow</button> :  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{onFollow(u.id)}} className={c.user__button}>Follow</button>}
+                            {u.followed ?  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{  props.unfollow(u.id);}} className={c.user__button}>Unfollow</button> :  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{props.follow(u.id)}} className={c.user__button}>Follow</button>}
                         </div>
                         <div className={c.user__center}>
                             <div className={c.user__fullname}>{u.name}</div>
