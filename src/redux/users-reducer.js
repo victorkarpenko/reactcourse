@@ -17,6 +17,7 @@ let initialState = {
     followingInProgress: [2,3]
 };
 
+//reducer
 const usersReducer = (state = initialState, action) =>{
     switch (action.type) {
         case FOLLOW:
@@ -75,13 +76,13 @@ const usersReducer = (state = initialState, action) =>{
 };
 
 // action creators
-export const followSuccess = (userID) => ({type: FOLLOW, userID: userID});
-export const unfollowSuccess = (userID) => ({type: UNFOLLOW, userID: userID});
+const followSuccess = (userID) => ({type: FOLLOW, userID: userID});
+const unfollowSuccess = (userID) => ({type: UNFOLLOW, userID: userID});
 export const setUsers = (users) => ({type: SET_USERS, users: users});
 export const setCurrentPage = (newCurrentPage) => ({type: SET_CURRENT_PAGE, newCurrentPage});
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export const toggleFollowingInProgress=(isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
+const toggleFollowingInProgress=(isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
 
 
 //thunk creators

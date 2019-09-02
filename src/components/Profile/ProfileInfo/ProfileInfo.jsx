@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
         for (var key in contactsLinks){
             if(contactsLinks[key]){
                 let classes= "icon icon--" + key;
-                contactsJSX.push(<a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}></a>);
+                contactsJSX.push(<a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}>{key}</a>);
             }
         }
 

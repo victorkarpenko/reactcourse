@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -14,6 +14,7 @@ let initialState = {
     userProfile: null
 };
 
+//reducer
 const profileReducer = (state = initialState, action) =>{
     switch (action.type) {
         case ADD_POST:
@@ -50,13 +51,14 @@ export const updateNewPostTextActionCreator = (text) =>({
     type: UPDATE_NEW_POST_TEXT, newText: text
 });
 
-export const setUserProfile = (userProfile) => ({
+const setUserProfile = (userProfile) => ({
     type: SET_USER_PROFILE, userProfile: userProfile
 });
 
+//thunk creator
 export const getProfile = (userId) => {
     return (dispatch) => {
-        profileAPI.getProfile(userId).then(data => {
+        usersAPI.getProfile(userId).then(data => {
             dispatch(setUserProfile(data));
         });
     }

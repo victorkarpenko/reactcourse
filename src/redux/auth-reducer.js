@@ -9,6 +9,7 @@ let initialState ={
     isAuth: false
 };
 
+//reducer
 const authReducer = (state = initialState, action) =>{
     switch (action.type) {
         case SET_USER_DATA:
@@ -22,8 +23,8 @@ const authReducer = (state = initialState, action) =>{
     }
 };
 
-
-export const setAuthUserData = (email, id, login) =>({
+//action creator
+const setAuthUserData = (email, id, login) =>({
     type: SET_USER_DATA, data: {
         email,
         id,
@@ -31,6 +32,7 @@ export const setAuthUserData = (email, id, login) =>({
     }
 });
 
+//thunk creator
 export const checkAuth = () => {
     return (dispatch) => {
         authAPI.getMe().then(data => {
