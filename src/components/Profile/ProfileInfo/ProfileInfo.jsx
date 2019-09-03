@@ -3,6 +3,7 @@ import c from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import avatar from '../../../assets/images/avatar.png';
 import lookingIcon from '../../../assets/images/lookingJobIcon.png'
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     if(!props.userProfile) {
@@ -26,6 +27,7 @@ const ProfileInfo = (props) => {
                         <div className={c.userProfile__fullname}>
                             {props.userProfile.fullName}
                         </div>
+                        <ProfileStatus status="test loll"/>
                         <div className={c.userProfile__contacts}>
                             {!!contactsJSX.length ?
                                 <div className="icons">

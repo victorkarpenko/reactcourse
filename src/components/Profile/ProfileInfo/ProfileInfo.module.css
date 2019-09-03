@@ -31,6 +31,10 @@
     padding-left: 15px;
 }
 
+.userProfile__status{
+    color: lightgray;
+    margin-top: 10px;
+}
 
 .userProfile__contacts{
     margin-top: 20px;
