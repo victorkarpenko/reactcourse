@@ -1,5 +1,49 @@
 .loginPage{
-    background-color: #e7f3ff;
+    background-color: #fdffff;
     height: 100%;
     padding: 30px;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.loginForm__input{
+    background: #f8f9fa;
+    border: 1px solid #dde4e7;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #114356;
+    padding: 14px;
+    font-style: italic;
+    height: 34px;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    background-color: #d53a3a;
+    font-weight: 700;
+    width: 250px;
+    height: 44px;
+    padding: 5px;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s all;
+    border: 0;
+    margin-top: 15px;
+    border-radius: 4px;
+}
+
+.button:hover{
+    background-color: #a9000b;
 }
