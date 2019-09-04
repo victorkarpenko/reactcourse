@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
     } else{
         let contactsLinks = props.userProfile.contacts;
         let contactsJSX = [];
-        for (var key in contactsLinks){
+        for (let key in contactsLinks){
             if(contactsLinks[key]){
                 let classes= "icon icon--" + key;
                 contactsJSX.push(<a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}>{key}</a>);
@@ -27,7 +27,7 @@ const ProfileInfo = (props) => {
                         <div className={c.userProfile__fullname}>
                             {props.userProfile.fullName}
                         </div>
-                        <ProfileStatus status="test loll"/>
+                        <ProfileStatus updStatus={props.updStatus} userStatus={props.userStatus}/>
                         <div className={c.userProfile__contacts}>
                             {!!contactsJSX.length ?
                                 <div className="icons">
