@@ -1,5 +1,4 @@
 const SEND_MSG = 'SEND-MSG';
-const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
 
 let initialState ={
     dialogs: [
@@ -19,20 +18,16 @@ let initialState ={
             type: 'output'
         },
         {id: 4, message: 'Okay, thanks for you respond', type: 'input'},
-
     ],
-    newMessage: ''
 };
 
 const messagesReducer = (state = initialState, action) =>{
-
-
     switch (action.type) {
         case SEND_MSG:
             const prevID = state.messages[state.messages.length - 1].id;
             let newMsg = {
                 id: prevID + 1,
-                message: state.newMessage,
+                message: action.newMessage,
                 type: 'output'
             };
 
@@ -40,23 +35,16 @@ const messagesReducer = (state = initialState, action) =>{
             if (newMsg.message !== ''){
                 newState = {
                     ...state,
-                    newMessage: '',
                     messages: [...state.messages, newMsg]
                 };
             }
             return newState;
-        case UPDATE_NEW_MSG:
-            return {...state, newMessage: action.newText};
         default:
             return state;
     }
 };
 
-export const sendMsgActionCreator = () => ({type: SEND_MSG});
-
-export const updateNewMsgActionCreator = (text) =>({
-    type: UPDATE_NEW_MSG, newText: text
-});
+export const sendMsgActionCreator = (newMessage) => ({type: SEND_MSG, newMessage});
 
 
 export default messagesReducer;

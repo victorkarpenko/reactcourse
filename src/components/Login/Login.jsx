@@ -9,7 +9,11 @@ const LoginForm = (props) => {
         <form onSubmit={props.handleSubmit} className={c.loginForm}>
             <Field component={'input'} name={'login'} type="text" placeholder="Login" className={c.loginForm__input} />
             <Field component={'input'} type={"password"} placeholder={"Password"} name={'password'} className={c.loginForm__input}/>
-            <Field component={'input'} name={'rememberMe'} type="checkbox"/>Remember me
+            <div className={c.loginForm__checkboxWrp}>
+                <Field className={c.loginForm__checkbox} id={'rememberMe'} component={'input'} name={'rememberMe'} type="checkbox"/>
+                <label className={c.loginForm__label} htmlFor={'rememberMe'}>Remember me</label>
+            </div>
+
             <button className={c.button}>Login</button>
         </form>
     )

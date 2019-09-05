@@ -11,7 +11,6 @@ let initialState = {
         {id: 2, message: 'It\'s my first react app', likes: '102'},
         {id: 3, likes: '8'},
     ],
-    newPostText: '',
     userProfile: null,
     userStatus: ''
 };
@@ -23,17 +22,16 @@ const profileReducer = (state = initialState, action) =>{
             const prevID = state.posts[state.posts.length - 1].id;
             let newPost = {
                 id: prevID+1,
-                message: state.newPostText,
+                message: action.newPostText,
                 likes: 0
             };
 
             let newState = {...state};
 
-            if(!!state.newPostText){
+            if(!!action.newPostText){
                 newState = {
                     ...state,
                     posts: [...state.posts, newPost],
-                    newPostText: ''
                 }
             }
             return newState;
@@ -49,11 +47,8 @@ const profileReducer = (state = initialState, action) =>{
 
 //action creators
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 
-export const updateNewPostTextActionCreator = (text) =>({
-    type: UPDATE_NEW_POST_TEXT, newText: text
-});
 
 const setUserProfile = (userProfile) => ({
     type: SET_USER_PROFILE, userProfile: userProfile

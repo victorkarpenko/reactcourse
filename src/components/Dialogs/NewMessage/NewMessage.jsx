@@ -1,26 +1,31 @@
 import React from 'react';
 import c from './NewMessage.module.css'
+import {reset, Field, reduxForm} from "redux-form";
+
+const NewMsgForm = (props) => {
+
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component={'input'} type={'text'} name={'newMsgInput'} className={c.textarea} placeholder="Enter new message"/>
+            <button className={c.sendBtn}></button>
+        </form>
+    );
+};
+
+const afterSubmit = (result, dispatch) =>
+    dispatch(reset('newMsgForm'));
+
+const ReduxNewMsgForm = reduxForm({form: 'newMsgForm',  onSubmitSuccess: afterSubmit,})(NewMsgForm);
 
 const NewMessage = (props) => {
 
-    const onButtonClick = () => {
-        props.sendMsg();
-    };
-    const onMsgChange = (e) =>{
-        const text = e.target.value;
-        props.updateNewMsg(text);
-    };
-    const onEnterPress = (e) =>{
-        if(e.keyCode === 13 && e.shiftKey === false) {
-            e.preventDefault();
-            onButtonClick();
-        }
+    const onButtonClick = (formData) => {
+        props.sendMsg(formData.newMsgInput);
     };
 
   return(
       <div className={c.newMessage}>
-          <textarea onKeyDown={onEnterPress} onChange={onMsgChange} className={c.textarea} value={props.newMsg} placeholder="Enter new message"></textarea>
-          <button className={c.sendBtn} onClick={onButtonClick}></button>
+          <ReduxNewMsgForm onSubmit={onButtonClick} />
       </div>
   )
 };
