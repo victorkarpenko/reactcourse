@@ -1,18 +1,13 @@
 import {connect} from "react-redux";
 import Login from "./Login";
+import {login} from "../../redux/auth-reducer";
 
 let mapStateToProps = (state) =>{
     return {
-
+        isAuth: state.auth.isAuth
     }
 };
 
-let mapDispatchToProps = (dispatch) =>{
-    return {
-
-    }
-};
-
-const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
+const LoginContainer = connect(mapStateToProps, {login})(Login);
 
 export default LoginContainer;

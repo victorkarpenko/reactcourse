@@ -15,8 +15,7 @@ const authReducer = (state = initialState, action) =>{
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             };
         default:
             return state;
@@ -24,13 +23,16 @@ const authReducer = (state = initialState, action) =>{
 };
 
 //action creator
-const setAuthUserData = (email, id, login) =>({
+const setAuthUserData = (email, id, login, isAuth) =>({
     type: SET_USER_DATA, data: {
         email,
         id,
-        login
+        login,
+        isAuth
     }
 });
+
+
 
 //thunk creator
 export const checkAuth = () => {
@@ -38,7 +40,27 @@ export const checkAuth = () => {
         authAPI.getMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
-                dispatch(setAuthUserData(email, id, login));
+                dispatch(setAuthUserData(email, id, login, true));
+            }
+        });
+    }
+};
+
+export const login = (loginData) => {
+    return (dispatch) => {
+        authAPI.login(loginData).then(data => {
+            if (data.resultCode === 0){
+              dispatch(checkAuth());
+            }
+        });
+    }
+};
+
+export const logout = () => {
+    return (dispatch) => {
+        authAPI.logout().then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false));
             }
         });
     }
