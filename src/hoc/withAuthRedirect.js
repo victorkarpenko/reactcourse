@@ -12,7 +12,5 @@ export const withAuthRedirect = (Component) => {
         }
     }
 
-    const ConnectedRedirectComponent = connect(state => ({isAuth: state.auth.isAuth}), {})(RedirectComponent);
-
-    return ConnectedRedirectComponent;
+    return connect(state => ({isAuth: state.auth.isAuth}), {})(RedirectComponent);
 };

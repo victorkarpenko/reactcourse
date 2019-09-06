@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
         let contactsLinks = props.userProfile.contacts;
         let contactsJSX = [];
         for (let key in contactsLinks){
-            if(contactsLinks[key]){
+            if(contactsLinks.hasOwnProperty(key) && contactsLinks[key]){
                 let classes= "icon icon--" + key;
                 contactsJSX.push(<a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer" className={classes}>{key}</a>);
             }

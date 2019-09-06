@@ -16,7 +16,9 @@ let Users = (props) => {
     return (
         <>
             <div className={c.pagination}>
-                {pagesNumbers.map(p => <span key={p} onClick={() => {props.onPageChanged(p)}} className={props.currentPage===p ? c.pagination__link_active + ' ' + c.pagination__link : c.pagination__link}>{p}</span> )}
+                {pagesNumbers.map(p => (<span key={p} onClick={() => {props.onPageChanged(p)}}
+                                              className={props.currentPage===p ? c.pagination__link_active + ' ' +
+                                                  c.pagination__link : c.pagination__link}>{p}</span>) )}
             </div>
             <div className={c.users}>
                 {
@@ -25,14 +27,20 @@ let Users = (props) => {
                             <NavLink to={'/profile/' + u.id}>
                                 <img className={c.user__avatar} src={u.photos.small !== null ? u.photos.small : avatar} alt=""/>
                             </NavLink>
-                            {u.followed ?  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{  props.unfollow(u.id);}} className={c.user__button}>Unfollow</button> :  <button disabled={props.followingInProgress.some(id => id===u.id)} onClick={()=>{props.follow(u.id)}} className={c.user__button}>Follow</button>}
+                            {
+                                u.followed ?
+                                    <button disabled={props.followingInProgress.some(id => id===u.id)}
+                                            onClick={()=>{props.unfollow(u.id);}} className={c.user__button}>Unfollow</button>
+                                :
+                                    <button disabled={props.followingInProgress.some(id => id===u.id)}
+                                            onClick={()=>{props.follow(u.id)}} className={c.user__button}>Follow</button>
+                            }
                         </div>
                         <div className={c.user__center}>
                             <div className={c.user__fullname}>{u.name}</div>
                             <div className={c.user__status}>{u.status}</div>
                         </div>
                         <div className={c.user__right}>
-                            {/*u.location.country}, {u.location.city*/}
                         </div>
                     </div>)
                 }

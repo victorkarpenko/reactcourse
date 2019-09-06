@@ -2,19 +2,18 @@ import React from 'react';
 import c from './Login.module.css';
 import {reduxForm} from "redux-form";
 import {Field} from "redux-form";
+import {Button, Checkbox, Input} from "../common/FormsControls/FormFields";
+import {emailValidation, requiredField} from "../../utils/validators/validators";
 
 
 const LoginForm = (props) => {
     return(
         <form onSubmit={props.handleSubmit} className={c.loginForm}>
-            <Field component={'input'} name={'login'} type="text" placeholder="Login" className={c.loginForm__input} />
-            <Field component={'input'} type={"password"} placeholder={"Password"} name={'password'} className={c.loginForm__input}/>
-            <div className={c.loginForm__checkboxWrp}>
-                <Field className={c.loginForm__checkbox} id={'rememberMe'} component={'input'} name={'rememberMe'} type="checkbox"/>
-                <label className={c.loginForm__label} htmlFor={'rememberMe'}>Remember me</label>
-            </div>
+            <Field component={Input} validate={emailValidation} name={'login'} type="text" placeholder="Login" />
+            <Field component={Input} validate={requiredField} type={"password"} placeholder={"Password"} name={'password'}/>
+            <Field id={'rememberMe'} component={Checkbox} name={'rememberMe'} label={'Remember me'}/>
 
-            <button className={c.button}>Login</button>
+            <Button label={'Login'}/>
         </form>
     )
 };
@@ -24,7 +23,7 @@ const ReduxLoginForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData);
+
     };
 
     return(

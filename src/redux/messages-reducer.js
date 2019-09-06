@@ -32,7 +32,7 @@ const messagesReducer = (state = initialState, action) =>{
             };
 
             let newState={...state};
-            if (newMsg.message !== ''){
+            if (!!newMsg.message){
                 newState = {
                     ...state,
                     messages: [...state.messages, newMsg]
