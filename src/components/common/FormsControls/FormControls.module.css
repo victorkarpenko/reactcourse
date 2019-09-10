@@ -102,7 +102,8 @@
 }
 
 .hasError .helpBlock,
-.hasError .checkbox__label{
+.hasError .checkbox__label,
+.hasError.helpBlock{
     color: #ef0000;
 }
 
