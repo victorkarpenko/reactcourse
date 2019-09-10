@@ -37,14 +37,14 @@ const setAuthUserData = (email, id, login, isAuth) =>({
 
 //thunk creator
 export const checkAuth = () => {
-    return (dispatch) => {
+    return (dispatch) => (
         authAPI.getMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
                 dispatch(setAuthUserData(email, id, login, true));
             }
-        });
-    }
+        })
+    );
 };
 
 export const login = (loginData) => {
