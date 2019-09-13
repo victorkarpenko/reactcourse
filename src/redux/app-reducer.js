@@ -23,7 +23,6 @@ export const setInit = () => ({type: SET_INITIALIZED});
 
 export const initializeApp = () => (dispatch) => {
     let promises = dispatch(checkAuth());
-    debugger;
     Promise.all([promises]).then(data => {
             dispatch(setInit())
         }
