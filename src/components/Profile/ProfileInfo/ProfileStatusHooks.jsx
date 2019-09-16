@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import c from './ProfileInfo.module.css'
 
 const ProfileStatusHooks = (props) => {
@@ -7,9 +7,17 @@ const ProfileStatusHooks = (props) => {
 
     let [status, setStatus] = useState(props.userStatus);
 
-    const changeEditMode = () => {
-        if(editMode===true){
-            props.updStatus(status)
+    useEffect(() => {
+        setStatus(props.userStatus)
+    },[props.userStatus]);
+
+    const activateEditMode = () => {
+        setEditMode(!editMode);
+    };
+
+    const deactivateEditMode = (e) => {
+        if(props.userStatus !== status){
+            props.updStatus(status);
         }
         setEditMode(!editMode);
     };
@@ -19,22 +27,21 @@ const ProfileStatusHooks = (props) => {
         setStatus(newStatus);
     };
 
-    debugger;
-        return (
-            <div>
-                {!editMode ?
-                    <div className={c.userProfile__status} onDoubleClick={changeEditMode}>
-                        <span>
-                            {props.userStatus ? props.userStatus : 'Double click to change status'}
-                        </span>
-                    </div>
-                    :
-                    <div className={c.userProfile__status}>
-                        <input value={status} autoFocus={true} onChange={changeUserStatus} onBlur={changeEditMode}/>
-                    </div>
-                }
-            </div>
-        );
+    return (
+        <div>
+            {!editMode ?
+                <div className={c.userProfile__status} onDoubleClick={activateEditMode}>
+                    <span>
+                        {props.userStatus ? props.userStatus : 'Double click to change status'}
+                    </span>
+                </div>
+                :
+                <div className={c.userProfile__status}>
+                    <input value={status} autoFocus={true} onChange={changeUserStatus} onBlur={deactivateEditMode}/>
+                </div>
+            }
+        </div>
+    );
 };
 
 
