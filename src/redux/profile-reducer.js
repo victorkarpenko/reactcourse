@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE ='SET-USER-PROFILE';
 const SET_USER_STATUS = 'SET-USER-STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     posts: [
@@ -33,6 +34,8 @@ const profileReducer = (state = initialState, action) =>{
             return {...state, userProfile: action.userProfile};
         case SET_USER_STATUS:
             return {...state, userStatus: action.userStatus};
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p => p.id !== action.postID)};
         default:  return state;
     }
 };
@@ -52,6 +55,8 @@ const setUserStatus = (userStatus) => (
         userStatus
     }
 );
+
+export const deletePost = (postID) => ({type: DELETE_POST, postID});
 
 //thunk creator
 export const getProfile = (userId) => {
@@ -79,5 +84,7 @@ export const updStatus = (status) =>{
         })
     }
 };
+
+
 
 export default profileReducer;
