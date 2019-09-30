@@ -3,7 +3,6 @@ import c from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import avatar from '../../../assets/images/avatar.png';
 import lookingIcon from '../../../assets/images/lookingJobIcon.png'
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
@@ -43,7 +42,6 @@ const ProfileInfo = (props) => {
                             <img src={lookingIcon} alt="" className={c.userProfile__lookingIcon}/>
                             {props.userProfile.lookingForAJobDescription}</div> : null}
                     </div>
-
                 </div>
             </div>
         )
