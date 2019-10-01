@@ -1,6 +1,6 @@
 import {checkAuth} from "./auth-reducer";
 
-const SET_INITIALIZED = "SET_INITIALIZED";
+const SET_INITIALIZED = "socailnetwork/app/SET_INITIALIZED";
 
 let initialState = {
     initialized: false,

@@ -1,4 +1,4 @@
-const SEND_MSG = 'SEND-MSG';
+const SEND_MSG = 'socailnetwork/messages/SEND-MSG';
 
 let initialState ={
     dialogs: [

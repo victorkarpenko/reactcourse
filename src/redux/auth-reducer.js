@@ -1,9 +1,9 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
 
-let initialState ={
+let initialState = {
     id: null,
     login: null,
     email: null,
@@ -11,7 +11,7 @@ let initialState ={
 };
 
 //reducer
-const authReducer = (state = initialState, action) =>{
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) =>{
 };
 
 //action creator
-const setAuthUserData = (email, id, login, isAuth) =>({
+const setAuthUserData = (email, id, login, isAuth) => ({
     type: SET_USER_DATA, data: {
         email,
         id,
@@ -34,38 +34,28 @@ const setAuthUserData = (email, id, login, isAuth) =>({
 });
 
 
-
 //thunk creator
-export const checkAuth = () => {
-    return (dispatch) => (
-        authAPI.getMe().then(data => {
-            if (data.resultCode === 0) {
-                let {id, login, email} = data.data;
-                dispatch(setAuthUserData(email, id, login, true));
-            }
-        })
-    );
-};
-
-export const login = (loginData) => {
-    return (dispatch) => {
-        authAPI.login(loginData).then(data => {
-            if (data.resultCode === 0){
-              dispatch(checkAuth());
-            } else{
-                dispatch(stopSubmit('login', {_error: data.messages[0]}))
-            }
-        });
+export const checkAuth = () => async (dispatch) => {
+    let data = await authAPI.getMe();
+    if (data.resultCode === 0) {
+        let {id, login, email} = data.data;
+        dispatch(setAuthUserData(email, id, login, true));
     }
 };
 
-export const logout = () => {
-    return (dispatch) => {
-        authAPI.logout().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false));
-            }
-        });
+export const login = (loginData) => async (dispatch) => {
+    let data = await authAPI.login(loginData);
+    if (data.resultCode === 0) {
+        dispatch(checkAuth());
+    } else {
+        dispatch(stopSubmit('login', {_error: data.messages[0]}))
+    }
+};
+
+export const logout = () => async (dispatch) => {
+    let data = await authAPI.logout();
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false));
     }
 };
 

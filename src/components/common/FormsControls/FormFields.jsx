@@ -14,7 +14,7 @@ const FormControl = ({input, meta, ...props}) => {
             </div>
         </div>
     )
-}
+};
 
 export const Textarea = (props) => {
     const {input, meta, child, ...restProps} = props;
@@ -49,4 +49,4 @@ export const Button = (props) => {
     return (
         <button {...props.type} className={props.className ? props.className : c.button}>{props.label}</button>
     )
-}
+};

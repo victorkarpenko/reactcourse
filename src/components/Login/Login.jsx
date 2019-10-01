@@ -8,15 +8,15 @@ import {Redirect} from "react-router-dom";
 import classes from '../common/FormsControls/FormControls.module.css'
 
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
 
     return(
-        <form onSubmit={props.handleSubmit} className={c.loginForm}>
+        <form onSubmit={handleSubmit} className={c.loginForm}>
             <Field component={Input} validate={emailValidation} name={'email'} type="text" placeholder="Login" />
             <Field component={Input} validate={requiredField} type={"password"} placeholder={"Password"} name={'password'}/>
             <Field id={'rememberMe'} component={Checkbox} name={'rememberMe'} label={'Remember me'}/>
             {
-                props.error && <div className={classes.helpBlock + ' ' + classes.hasError}>{props.error}</div>
+                error && <div className={classes.helpBlock + ' ' + classes.hasError}>{error}</div>
             }
             <Button label={'Login'}/>
         </form>
