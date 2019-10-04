@@ -6,11 +6,12 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {Route, withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/store";
 
 class App extends React.Component {
     componentDidMount() {
@@ -41,7 +42,25 @@ const MapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
 
-export default compose(
+/*export default compose(
+    withRouter,
+    connect(MapStateToProps, {initializeApp})
+)(App);*/
+
+
+let AppContainer = compose(
     withRouter,
     connect(MapStateToProps, {initializeApp})
 )(App);
+
+let MainApp = (props) => {
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <AppContainer />
+            </BrowserRouter>
+        </Provider>
+    )
+};
+
+export default MainApp
