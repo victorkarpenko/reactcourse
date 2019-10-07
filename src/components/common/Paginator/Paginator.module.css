@@ -5,14 +5,28 @@
     flex-wrap: wrap;
 }
 
-.pagination__link{
+.pagination__link,
+.pagination__btn{
     font-size: 18px;
     display: block;
-    min-width: 15px;
-    padding-right: 5px;
+    min-width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-right: 5px;
     cursor: pointer;
+    background-color: #323c44;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 4px;
 }
 
 .pagination__link_active{
-    font-weight: 700;
+    background-color: #4c547a;
+    pointer-events: none;
+}
+
+.pagination__btn{
+    min-width: 70px;
+    border: 0;
+    box-shadow: none;
 }

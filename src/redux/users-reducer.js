@@ -12,10 +12,11 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'socailnetwork/users/TOGGLE_IS_FOLLOWING_PR
 let initialState = {
     users: [],
     pageSize: 20,
-    totalUsersCount: 1,
+    totalItemsCount: 1,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [2, 3]
+    followingInProgress: [2, 3],
+    linksOnPage: 10
 };
 
 //reducer
@@ -43,7 +44,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS_COUNT : {
             return {
                 ...state,
-                totalUsersCount: action.totalCount
+                totalItemsCount: action.totalCount
             }
         }
         case TOGGLE_IS_FETCHING : {

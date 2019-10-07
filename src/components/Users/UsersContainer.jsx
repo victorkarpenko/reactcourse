@@ -42,10 +42,11 @@ let mapStateToProps = (state) => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
-        totalUsersCount: getUsersTotalCount(state),
+        totalItemsCount: getUsersTotalCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        linksOnPage: state.usersPage.linksOnPage
     }
 };
 
