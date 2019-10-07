@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -12,6 +12,8 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/store";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
     componentDidMount() {
@@ -27,7 +29,7 @@ class App extends React.Component {
                     <NavbarContainer/>
 
                     <div className="main">
-                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                        <Route path='/dialogs' render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                         <Route path='/login' render={() => <LoginContainer/>}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
@@ -41,12 +43,6 @@ class App extends React.Component {
 const MapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
-
-/*export default compose(
-    withRouter,
-    connect(MapStateToProps, {initializeApp})
-)(App);*/
-
 
 let AppContainer = compose(
     withRouter,
