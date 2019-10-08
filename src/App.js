@@ -6,7 +6,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -51,11 +51,13 @@ let AppContainer = compose(
 
 let MainApp = (props) => {
     return (
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppContainer />
-            </BrowserRouter>
-        </Provider>
+
+            <HashRouter basename = {process.env.PUBLIC_URL}>
+                <Provider store={store}>
+                    <AppContainer />
+                </Provider>
+            </HashRouter>
+
     )
 };
 
