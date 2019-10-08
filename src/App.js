@@ -52,7 +52,7 @@ let AppContainer = compose(
 let MainApp = (props) => {
     return (
 
-            <HashRouter basename = {process.env.PUBLIC_URL}>
+            <HashRouter basename={'/'}>
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
