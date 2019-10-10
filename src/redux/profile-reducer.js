@@ -1,8 +1,8 @@
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'socailnetwork/profile/ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'socailnetwork/profile/UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'socailnetwork/profile/SET-USER-PROFILE';
+const SET_USER_PHOTO = 'socailnetwork/profile/SET-USER-PHOTO';
 const SET_USER_STATUS = 'socailnetwork/profile/SET-USER-STATUS';
 const DELETE_POST = 'socailnetwork/profile/DELETE_POST';
 
@@ -13,7 +13,7 @@ let initialState = {
         {id: 3, likes: '8'},
     ],
     userProfile: null,
-    userStatus: ''
+    userStatus: '',
 };
 
 //reducer
@@ -28,12 +28,12 @@ const profileReducer = (state = initialState, action) => {
             };
 
             return {...state, posts: [...state.posts, newPost]};
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.newText};
         case SET_USER_PROFILE:
             return {...state, userProfile: action.userProfile};
         case SET_USER_STATUS:
             return {...state, userStatus: action.userStatus};
+        case SET_USER_PHOTO:
+            return {...state, userProfile:{...state.userProfile, photos: action.photo}};
         case DELETE_POST:
             return {...state, posts: state.posts.filter(p => p.id !== action.postID)};
         default:
@@ -57,6 +57,11 @@ const setUserStatus = (userStatus) => (
     }
 );
 
+const setUserPhoto = (photo) => ({
+    type: SET_USER_PHOTO,
+    photo
+});
+
 export const deletePost = (postID) => ({type: DELETE_POST, postID});
 
 //thunk creator
@@ -70,9 +75,17 @@ export const getStatus = (userId) => async (dispatch) => {
     dispatch(setUserStatus(data));
 };
 
+export const savePhoto = (photo) => async (dispatch) => {
+    let data = await profileAPI.uploadPhoto(photo);
+    if(data.resultCode ===0){
+        dispatch(setUserPhoto(data.data.photos));
+    }
+
+};
 
 export const updStatus = (status) => async (dispatch) => {
     let data = await profileAPI.updStatus(status);
+
     if (data.resultCode === 0) {
         dispatch(setUserStatus(status))
     }

@@ -16,15 +16,55 @@
     display: flex;
     padding: 20px;
 }
-
 .userProfile__fullname{
     font-size: 22px;
     font-weight: 700;
 }
 
-.userProfile__avatar{
+.userProfile__avatarContainer{
     width: 150px;
+    height: 150px;
     border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.userProfile__avatar{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+
+.userProfile__photoInput{
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0,0,.0) no-repeat center center;
+    color: white;
+    height: 50px;
+    display: block;
+    transition: all .3s;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.userProfile__photoicon{
+    width: 30px;
+}
+
+.userProfile__photoInput input{
+    display: none;
+}
+
+.userProfile__avatarContainer:hover .userProfile__photoInput{
+    z-index: 2;
+    background: rgba(0, 0,0,.5);
+    transform: translateY(0);
 }
 
 .userProfile__info{

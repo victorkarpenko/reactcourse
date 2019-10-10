@@ -29,16 +29,17 @@ const ProfileStatusHooks = (props) => {
 
     return (
         <div>
-            {!editMode ?
-                <div className={c.userProfile__status} onDoubleClick={activateEditMode}>
-                    <span>
-                        {props.userStatus ? props.userStatus : 'Double click to change status'}
-                    </span>
-                </div>
-                :
+            {(editMode && props.isOwner) ?
                 <div className={c.userProfile__status}>
                     <input value={status} autoFocus={true} onChange={changeUserStatus} onBlur={deactivateEditMode}/>
                 </div>
+                :
+                <div className={c.userProfile__status} onDoubleClick={activateEditMode}>
+                    <span>
+                        {props.isOwner &&  !props.userStatus ? 'Double click to change status' : props.userStatus}
+                    </span>
+                </div>
+
             }
         </div>
     );
