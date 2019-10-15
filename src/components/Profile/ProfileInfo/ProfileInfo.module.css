@@ -69,11 +69,33 @@
 
 .userProfile__info{
     padding-left: 15px;
+    position: relative;
+    flex: 0 1 360px;
+    padding-right: 30px;
 }
+
+.userProfile__editbtn{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: 0;
+    box-shadow: none;
+    background: 0;
+
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    opacity: .6;
+
+}
+.userProfile__editbtn:hover{
+    opacity: .9;
+}
+
 
 .userProfile__status{
     color: lightgray;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .userProfile__contacts{

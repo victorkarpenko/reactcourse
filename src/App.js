@@ -1,12 +1,11 @@
 import React, {Suspense} from 'react';
 import './App.css';
-//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -21,20 +20,21 @@ class App extends React.Component {
     }
 
     render() {
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         } else return (
-                <div className="App">
-                    <HeaderContainer/>
-                    <NavbarContainer/>
+            <div className="App">
+                <HeaderContainer/>
+                <NavbarContainer/>
 
-                    <div className="main">
-                        <Route path='/dialogs' render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                        <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                    </div>
+                <div className="main">
+                    <Route path='/dialogs'
+                           render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/login' render={() => <LoginContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
+            </div>
         );
 
     }
@@ -52,11 +52,11 @@ let AppContainer = compose(
 let MainApp = (props) => {
     return (
 
-            <HashRouter basename={'/'}>
-                <Provider store={store}>
-                    <AppContainer />
-                </Provider>
-            </HashRouter>
+        <HashRouter basename={'/'}>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
 
     )
 };
