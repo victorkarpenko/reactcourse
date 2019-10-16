@@ -7,6 +7,7 @@ import ProfileStatusHooks from "./ProfileStatusHooks";
 import editBtn from "../../../assets/images/edit-button.svg"
 import ProfileDataForm from "./ProfileDataForm";
 
+
 const ProfileInfo = (props) => {
     let [editMode, setEditMode] = React.useState(false);
 
@@ -16,8 +17,16 @@ const ProfileInfo = (props) => {
         }
     };
 
-    const onSubmit= (formData) => {
-        console.log(formData);
+    const onSubmit = (formData) => {
+        props.saveProfileData(formData).then(() => {
+            setEditMode(false);
+        }).catch(e => {
+            console.log(e);
+        });
+    };
+
+    const cancelEdit = () =>{
+        setEditMode(false);
     };
 
     return (
@@ -36,7 +45,11 @@ const ProfileInfo = (props) => {
                     <ProfileStatusHooks isOwner={props.isOwner} updStatus={props.updStatus}
                                         userStatus={props.userStatus}/>
 
-                    {editMode ? <ProfileDataForm onSubmit={onSubmit}/> : <ProfileData isOwner={props.isOwner} setEditMode={()=>{setEditMode(true)}} userProfile={props.userProfile}/>}
+                    {editMode ? <ProfileDataForm cancelEdit={cancelEdit} userProfile={props.userProfile} initialValues={props.userProfile}
+                                                 onSubmit={onSubmit}/> :
+                        <ProfileData isOwner={props.isOwner} setEditMode={() => {
+                            setEditMode(true)
+                        }} userProfile={props.userProfile}/>}
 
                 </div>
 
@@ -49,7 +62,10 @@ const ProfileInfo = (props) => {
 const ProfileData = (props) => {
     return (
         <>
-            {props.isOwner ? <button type="button" className={c.userProfile__editbtn} onClick={props.setEditMode}> <img src={editBtn} alt=""/></button> : null}
+            {props.isOwner ?
+                <button type="button" className={c.userProfile__editbtn} onClick={props.setEditMode}><img src={editBtn}
+                                                                                                          alt=""/>
+                </button> : null}
             <div className={c.userProfile__fullname}>
                 {props.userProfile.fullName}
             </div>
@@ -63,7 +79,6 @@ const ProfileData = (props) => {
         </>
     );
 };
-
 
 
 const ProfileContacts = (props) => {

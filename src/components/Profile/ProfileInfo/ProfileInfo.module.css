@@ -16,6 +16,7 @@
     display: flex;
     padding: 20px;
 }
+
 .userProfile__fullname{
     font-size: 22px;
     font-weight: 700;
@@ -117,4 +118,15 @@
 .userProfile__lookingIcon{
     width: 15px;
     margin-right: 8px;
+}
+
+.userProfile__formField{
+
+}
+
+.userProfile__formField span{
+    display: block;
+    font-size: 11px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }

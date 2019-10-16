@@ -39,7 +39,7 @@ export const Checkbox = ({input, meta, ...props}) => {
     const fieldClassname = hasError ? c.formField + ' ' + c.hasError : c.formField;
     return (
         <div className={fieldClassname}>
-            <input type='checkbox' {...input} {...props} className={c.checkbox + ' ' + c.formControl}/>
+            <input type='checkbox' {...input} {...props} checked={input.value} className={c.checkbox + ' ' + c.formControl}/>
             <label className={c.checkbox__label} htmlFor={props.id}>{props.label}</label>
         </div>
     )

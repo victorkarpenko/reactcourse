@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'socailnetwork/profile/ADD-POST';
 const SET_USER_PROFILE = 'socailnetwork/profile/SET-USER-PROFILE';
@@ -42,9 +43,7 @@ const profileReducer = (state = initialState, action) => {
 };
 
 //action creators
-
 export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
-
 
 const setUserProfile = (userProfile) => ({
     type: SET_USER_PROFILE, userProfile: userProfile
@@ -77,10 +76,21 @@ export const getStatus = (userId) => async (dispatch) => {
 
 export const savePhoto = (photo) => async (dispatch) => {
     let data = await profileAPI.uploadPhoto(photo);
-    if(data.resultCode ===0){
+    if(data.resultCode === 0){
         dispatch(setUserPhoto(data.data.photos));
     }
+};
 
+export const saveProfileData = (profileData) => async (dispatch, getState) => {
+    let data = await profileAPI.saveProfileData(profileData);
+
+    if(data.resultCode === 0){
+        let profileId = getState().auth.id;
+        dispatch(getProfile(profileId));
+    } else{
+        dispatch(stopSubmit('profileForm', {_error: data.messages[0]}))
+        return Promise.reject(data.messages[0]);
+    }
 };
 
 export const updStatus = (status) => async (dispatch) => {
