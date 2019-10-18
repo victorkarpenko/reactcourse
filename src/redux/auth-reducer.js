@@ -1,13 +1,15 @@
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
+const SET_CAPTCHA_URL = 'socialnetwork/auth/SET_CAPTCHA_URL';
 
 let initialState = {
     id: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 };
 
 //reducer
@@ -17,6 +19,10 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data
+            };
+        case SET_CAPTCHA_URL:
+            return {
+                ...state, captchaUrl: action.captchaUrl
             };
         default:
             return state;
@@ -33,10 +39,13 @@ const setAuthUserData = (email, id, login, isAuth) => ({
     }
 });
 
+const setCaptchaUrl = (captchaUrl) =>({
+    type: SET_CAPTCHA_URL, captchaUrl
+});
 
 //thunk creator
 export const checkAuth = () => async (dispatch) => {
-    let data = await authAPI.getMe();
+    const data = await authAPI.getMe();
     if (data.resultCode === 0) {
         let {id, login, email} = data.data;
         dispatch(setAuthUserData(email, id, login, true));
@@ -44,19 +53,30 @@ export const checkAuth = () => async (dispatch) => {
 };
 
 export const login = (loginData) => async (dispatch) => {
-    let data = await authAPI.login(loginData);
+    const data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(checkAuth());
-    } else {
+    }
+    else{
+        if(data.resultCode === 10) {
+            dispatch(getCaptcha());
+        }
+
         dispatch(stopSubmit('login', {_error: data.messages[0]}))
     }
 };
 
 export const logout = () => async (dispatch) => {
-    let data = await authAPI.logout();
+    const data = await authAPI.logout();
     if (data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false));
     }
+};
+
+export const getCaptcha = () => async (dispatch) =>{
+    const response = await securityAPI.getCaptcha();
+    const captchaUrl = response.url;
+    dispatch(setCaptchaUrl(captchaUrl));
 };
 
 export default authReducer;
