@@ -60,6 +60,26 @@ a:hover{
   }
 }
 
+.error-page{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error-page span{
+  font-size: 80px;
+  font-weight: 700;
+}
+
+.error-page div{
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .icons{
   display: flex;
   flex-wrap: wrap;

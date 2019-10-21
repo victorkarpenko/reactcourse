@@ -94,12 +94,15 @@ export const saveProfileData = (profileData) => async (dispatch, getState) => {
 };
 
 export const updStatus = (status) => async (dispatch) => {
-    let data = await profileAPI.updStatus(status);
-
-    if (data.resultCode === 0) {
-        dispatch(setUserStatus(status))
+    try{
+        let data = await profileAPI.updStatus(status);
+    
+        if (data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+        }
+    } catch (e) {
+       alert(e.message)
     }
 };
-
 
 export default profileReducer;

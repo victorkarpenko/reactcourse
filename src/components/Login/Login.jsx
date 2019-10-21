@@ -7,7 +7,6 @@ import {emailValidation, requiredField} from "../../utils/validators/validators"
 import {Redirect} from "react-router-dom";
 import classes from '../common/FormsControls/FormControls.module.css'
 
-
 const LoginForm = ({handleSubmit, error, captchaUrl}) => {
 
     return(
@@ -25,7 +24,6 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
         </form>
     )
 };
-
 
 const ReduxLoginForm = reduxForm({form: 'login'})(LoginForm);
 
@@ -45,7 +43,5 @@ const Login = (props) => {
     )
     }
 };
-
-
 
 export default Login;

@@ -5,7 +5,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -15,8 +15,19 @@ import store from "./redux/store";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
+
+    catchAllUnhandledErrors = (PromiseRejectionEvent) => {
+        alert(PromiseRejectionEvent);
+    };
+
     componentDidMount() {
         this.props.initializeApp();
+        
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandlerejextion', this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -28,11 +39,18 @@ class App extends React.Component {
                 <NavbarContainer/>
 
                 <div className="main">
-                    <Route path='/dialogs'
-                           render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/login' render={() => <LoginContainer/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Switch>
+
+                        <Route path='/dialogs'
+                               render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route path='/login' render={() => <LoginContainer/>}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Redirect exact from="/" to="/profile" />
+                        <Route path='*' render={() => <div className="error-page"><span>404</span> <div>not found</div></div>}/>
+
+                    </Switch>
+
                 </div>
             </div>
         );
@@ -52,11 +70,11 @@ let AppContainer = compose(
 let MainApp = (props) => {
     return (
 
-        <HashRouter basename={'/'}>
+        <BrowserRouter >
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
 
     )
 };
