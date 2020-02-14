@@ -1,11 +1,22 @@
 const SEND_MSG = 'socailnetwork/messages/SEND-MSG';
 
+type DialogType = {
+    id: number,
+    name: string
+}
+
+type MessageType = {
+    id: number,
+    message: string,
+    type: string
+}
+
 let initialState ={
     dialogs: [
-        {id: '1', name: 'Viktor'},
-        {id: '2', name: 'Sebek'},
-        {id: '3', name: 'Cotlovan'},
-    ],
+        {id: 1, name: 'Viktor'},
+        {id: 2, name: 'Sebek'},
+        {id: 3, name: 'Cotlovan'},
+    ] as Array<DialogType>,
 
     messages: [
         {id: 1, message: 'Hey, how are you', type: 'input'},
@@ -18,10 +29,12 @@ let initialState ={
             type: 'output'
         },
         {id: 4, message: 'Okay, thanks for you respond', type: 'input'},
-    ],
+    ] as Array<MessageType>,
 };
 
-const messagesReducer = (state = initialState, action) =>{
+type InitialStateType = typeof initialState;
+
+const messagesReducer = (state = initialState, action: any):InitialStateType =>{
     switch (action.type) {
         case SEND_MSG:
             const prevID = state.messages[state.messages.length - 1].id;
@@ -44,7 +57,12 @@ const messagesReducer = (state = initialState, action) =>{
     }
 };
 
-export const sendMsgActionCreator = (newMessage) => ({type: SEND_MSG, newMessage});
+type SendMsgActionType = {
+    type: typeof SEND_MSG,
+    newMessage: string
+}
+
+export const sendMsgActionCreator = (newMessage:string): SendMsgActionType => ({type: SEND_MSG, newMessage});
 
 
 export default messagesReducer;

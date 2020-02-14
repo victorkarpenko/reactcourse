@@ -5,20 +5,14 @@ import {stopSubmit} from "redux-form";
 const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
 const SET_CAPTCHA_URL = 'socialnetwork/auth/SET_CAPTCHA_URL';
 
-export type InitialStateType = {
-    id: number | null,
-    login: string | null,
-    email: string | null,
-    isAuth: boolean,
-    captchaUrl: string | null
-}
+export type InitialStateType = typeof initialState
 
-let initialState: InitialStateType = {
-    id: null,
-    login: null,
-    email: null,
+let initialState = {
+    id: null as number | null,
+    login: null as string | null,
+    email: null as string | null,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null as string | null,
 };
 
 //reducer
