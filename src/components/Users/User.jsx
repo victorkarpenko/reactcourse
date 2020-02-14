@@ -11,7 +11,7 @@ export const User = (props) => {
                 <img className={c.user__avatar} src={props.user.photos.small !== null ? props.user.photos.small : avatar} alt=""/>
             </NavLink>
             {
-                props.followed ?
+                props.user.followed ?
                     <button disabled={props.followingInProgress.some(id => id===props.user.id)}
                             onClick={()=>{props.unfollow(props.user.id);}} className={c.user__button}>Unfollow</button>
                     :

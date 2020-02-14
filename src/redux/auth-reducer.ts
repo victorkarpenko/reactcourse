@@ -5,8 +5,6 @@ import {stopSubmit} from "redux-form";
 const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
 const SET_CAPTCHA_URL = 'socialnetwork/auth/SET_CAPTCHA_URL';
 
-export type InitialStateType = typeof initialState
-
 let initialState = {
     id: null as number | null,
     login: null as string | null,
@@ -14,6 +12,8 @@ let initialState = {
     isAuth: false,
     captchaUrl: null as string | null,
 };
+
+export type InitialStateType = typeof initialState
 
 //reducer
 const authReducer = (state = initialState, action: any):InitialStateType => {
