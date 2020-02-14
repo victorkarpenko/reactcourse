@@ -2,12 +2,16 @@ import {checkAuth} from "./auth-reducer";
 
 const SET_INITIALIZED = "socailnetwork/app/SET_INITIALIZED";
 
-let initialState = {
+export type InitialStateType = {
+    initialized: boolean
+}
+
+let initialState: InitialStateType = {
     initialized: false,
 };
 
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action: any):InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED:
             return {
@@ -19,9 +23,13 @@ const appReducer = (state = initialState, action) => {
     }
 };
 
-export const setInit = () => ({type: SET_INITIALIZED});
+type InitializedActionType = {
+    type: typeof SET_INITIALIZED
+}
 
-export const initializeApp = () => (dispatch) => {
+export const setInit = ():InitializedActionType => ({type: SET_INITIALIZED});
+
+export const initializeApp = () => (dispatch:any) => {
     let promises = dispatch(checkAuth());
     Promise.all([promises]).then(data => {
             dispatch(setInit())
