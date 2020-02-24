@@ -2,22 +2,31 @@ import React, {useEffect, useState} from 'react';
 import c from "./Paginator.module.css";
 import cn from 'classnames';
 
-let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, linksOnPage = 10}) => {
+type Props = {
+    totalItemsCount: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChanged: (page: number) => void,
+    linksOnPage?: number
+}
 
-    let pagesCount = Math.ceil(totalItemsCount / pageSize);
-    let pagesNumbers = [];
+
+const Paginator: React.FC<Props> = ({totalItemsCount, pageSize, currentPage, onPageChanged, linksOnPage = 10}) => {
+
+    const pagesCount:number = Math.ceil(totalItemsCount / pageSize);
+    const pagesNumbers: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pagesNumbers.push(i);
     }
 
-    let portionCount = Math.ceil(pagesCount / linksOnPage);
-    let [portionNumber, setPortionNumber] = useState(1);
+    const portionCount:number = Math.ceil(pagesCount / linksOnPage);
+    const [portionNumber, setPortionNumber] = useState(1);
 
-    let leftPortionPageNumber = (portionNumber - 1) * linksOnPage + 1;
-    let rightPortionNumber = portionNumber * linksOnPage;
+    const leftPortionPageNumber:number = (portionNumber - 1) * linksOnPage + 1;
+    const rightPortionNumber:number = portionNumber * linksOnPage;
 
     useEffect(() => {
-        let currentPortion = Math.ceil(currentPage / linksOnPage);
+        const currentPortion:number = Math.ceil(currentPage / linksOnPage);
         setPortionNumber(currentPortion);
     }, [currentPage, linksOnPage]);
 

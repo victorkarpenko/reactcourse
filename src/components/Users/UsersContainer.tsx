@@ -13,7 +13,32 @@ import {
     getUsersTotalCount
 } from "../../redux/users-selectors";
 
-class UsersContainer extends React.Component {
+import {UserType} from "../../types/types";
+import {AppStateType} from "../../redux/store";
+
+type MapStatePropsType = {
+    users: Array<UserType>,
+    currentPage: number,
+    pageSize: number,
+    isFetching: boolean,
+    totalItemsCount: number,
+    followingInProgress: Array<number>,
+}
+
+type MapDispatchPropsType = {
+    requestUsers: (currentPage: number, pageSize: number) => void,
+    setCurrentPage: (currentPage: number) => void,
+    follow: (id: number) => void,
+    unfollow: (id: number) => void
+}
+
+type OwnPropsTypes = {
+    pageTitle? : string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsTypes;
+
+class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         const {currentPage, pageSize} = this.props;
         if (this.props.users.length === 0) {
@@ -21,7 +46,7 @@ class UsersContainer extends React.Component {
         }
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.requestUsers(pageNumber, this.props.pageSize);
     };
@@ -33,12 +58,12 @@ class UsersContainer extends React.Component {
                 {this.props.isFetching ?
                     <Preloader/>
                     :
-                    <Users {...this.props} onPageChanged={this.onPageChanged} />}
+                    <Users {...this.props} onPageChanged={this.onPageChanged}/>}
             </>);
     }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -46,12 +71,11 @@ let mapStateToProps = (state) => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
-        linksOnPage: state.usersPage.linksOnPage
     }
 };
 
 export default compose(
-    connect(mapStateToProps, {
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsTypes, AppStateType>(mapStateToProps, {
         setCurrentPage,
         requestUsers,
         follow,
