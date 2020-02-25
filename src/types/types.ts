@@ -37,3 +37,8 @@ export type UserType = {
     photos: PhotosType,
     followed: boolean
 }
+
+export type FriendType = {
+    id: number,
+    name: string
+}

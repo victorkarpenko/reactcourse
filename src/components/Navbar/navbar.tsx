@@ -2,8 +2,13 @@ import React from 'react';
 import classes from './navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import {FriendType} from "../../types/types";
 
-const Navbar = (props) => {
+type Props = {
+    friends: Array<FriendType>
+}
+
+const Navbar: React.FC<Props> = (props) => {
     return(
         <aside className={classes.sidebar}>
             <nav className={classes.navigation}>
@@ -11,7 +16,7 @@ const Navbar = (props) => {
                 <NavLink to="/dialogs" className={classes.item} activeClassName={classes.active}>Dialogs</NavLink>
                 <NavLink to="/users" className={classes.item} activeClassName={classes.active}>Users</NavLink>
             </nav>
-            <Friends friends={props.sidebar.friends}/>
+            <Friends friends={props.friends}/>
         </aside>
     )
 };

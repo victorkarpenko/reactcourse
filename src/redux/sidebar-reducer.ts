@@ -1,9 +1,6 @@
-type FriendType = {
-    id: number,
-    name: string
-}
+import {FriendType} from "../types/types";
 
-let initialState = {
+const initialState = {
     friends : [
         {id: 2, name: 'Sebek'},
         {id: 3, name: 'Cotlovan'},

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import c from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
+import {Field, reduxForm, reset} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 import {Button, Textarea} from "../../common/FormsControls/FormFields";
 
@@ -17,7 +17,10 @@ const AddPostForm = (props) => {
     )
 }
 
-const ReduxAddPostForm = reduxForm({form: 'addPostForm'})(AddPostForm);
+const afterSubmit = (result, dispatch) =>
+    dispatch(reset('addPostForm'));
+
+const ReduxAddPostForm = reduxForm({form: 'addPostForm', onSubmitSuccess: afterSubmit})(AddPostForm);
 
 const MyPosts = React.memo(props => {
 

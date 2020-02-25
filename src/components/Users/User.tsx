@@ -2,8 +2,16 @@ import React from 'react';
 import c from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import avatar from "../../assets/images/avatar.png";
+import {UserType} from "../../types/types";
 
-export const User = (props) => {
+type Props = {
+    user: UserType,
+    followingInProgress: Array<number>,
+    follow: (id: number) => void,
+    unfollow: (id: number) => void
+}
+
+export const User: React.FC<Props> = (props) => {
     return (
     <div className={c.user} >
         <div className={c.user__left}>
@@ -27,4 +35,4 @@ export const User = (props) => {
         </div>
     </div>
     )
-}
+};

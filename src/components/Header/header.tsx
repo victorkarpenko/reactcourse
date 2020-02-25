@@ -4,7 +4,13 @@ import c from './header.module.css'
 import {NavLink} from "react-router-dom";
 import logout from "../../assets/images/logout.svg";
 
-const Header = (props) => {
+type Props = {
+    isAuth: boolean,
+    login: string | null,
+    logout: () => void
+}
+
+const Header: React.FC<Props> = (props) => {
     return(
         <header className={c.header}>
             <img src={logo} alt="" className={c.logo}/>
