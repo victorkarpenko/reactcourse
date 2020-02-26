@@ -3,8 +3,14 @@ import c from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import NewMessage from "./NewMessage/NewMessage";
+import {MessagesInitialStateType} from "../../redux/messages-reducer";
 
-const Dialogs = (props) => {
+type Props = {
+    messagesPage: MessagesInitialStateType,
+    sendMsg: (newMsg: string) => void
+}
+
+const Dialogs: React.FC<Props> = (props) => {
 
 
     const dialogsElems =  props.messagesPage.dialogs.map(item => (<DialogItem name={item.name} id={item.id} key={item.id} />));

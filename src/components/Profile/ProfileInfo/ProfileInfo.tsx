@@ -6,21 +6,30 @@ import {ReactComponent as PhotoIcon} from '../../../assets/images/changePhoto.sv
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import editBtn from "../../../assets/images/edit-button.svg"
 import ProfileDataForm from "./ProfileDataForm";
+import {ProfileType, ContactsType} from "../../../types/types";
 
+type InfoProps = {
+    isOwner: boolean,
+    savePhoto: (photo: string) => void,
+    saveProfileData: (profileData: any) => any,
+    userProfile: ProfileType,
+    userStatus: string,
+    updStatus: (status: string) => void,
+}
 
-const ProfileInfo = (props) => {
-    let [editMode, setEditMode] = React.useState(false);
+const ProfileInfo: React.FC<InfoProps> = (props) => {
+    const [editMode, setEditMode] = React.useState(false);
 
-    const onPhotoSelected = (e) => {
+    const onPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             props.savePhoto(e.target.files[0]);
         }
     };
 
-    const onSubmit = (formData) => {
+    const onSubmit = (formData:ProfileType) => {
         props.saveProfileData(formData).then(() => {
             setEditMode(false);
-        }).catch(e => {
+        }).catch((e: any) => {
             console.log(e);
         });
     };
@@ -59,7 +68,13 @@ const ProfileInfo = (props) => {
     )
 };
 
-const ProfileData = (props) => {
+type DataType = {
+    isOwner: boolean,
+    userProfile: ProfileType,
+    setEditMode: ()=>void
+}
+
+const ProfileData: React.FC<DataType> = (props) => {
     return (
         <>
             {props.isOwner ?
@@ -67,7 +82,7 @@ const ProfileData = (props) => {
                                                                                                           alt=""/>
                 </button> : null}
             <div className={c.userProfile__fullname}>
-                {props.userProfile.fullName}
+                {props.userProfile.fullname}
             </div>
 
             <ProfileContacts contacts={props.userProfile.contacts}/>
@@ -80,14 +95,18 @@ const ProfileData = (props) => {
     );
 };
 
+type ContactsProps = {
+    contacts: ContactsType
+}
 
-const ProfileContacts = (props) => {
-    let contactsLinks = props.contacts;
+const ProfileContacts: React.FC<ContactsProps> = (props) => {
+    const contactsLinks = props.contacts;
 
-    let contactsJSX = Object.keys(contactsLinks).map(key => {
-        if (contactsLinks[key]) {
-            let classes = "icon icon--" + key;
-            return <a key={key} href={contactsLinks[key]} target="_blank" rel="noopener noreferrer"
+
+    const contactsJSX = Object.keys(contactsLinks).map((key) => {
+        if (contactsLinks[key as keyof ContactsType]) {
+            const classes = "icon icon--" + key;
+            return <a key={key} href={contactsLinks[key as keyof ContactsType] as string} target="_blank" rel="noopener noreferrer"
                       className={classes}>{key}</a>
         } else return null;
     });

@@ -8,10 +8,10 @@ type DialogType = {
 type MessageType = {
     id: number,
     message: string,
-    type: string
+    type: 'input' | 'output',
 }
 
-let initialState ={
+const initialState ={
     dialogs: [
         {id: 1, name: 'Viktor'},
         {id: 2, name: 'Sebek'},
@@ -32,9 +32,9 @@ let initialState ={
     ] as Array<MessageType>,
 };
 
-type InitialStateType = typeof initialState;
+export type MessagesInitialStateType = typeof initialState;
 
-const messagesReducer = (state = initialState, action: any):InitialStateType =>{
+const messagesReducer = (state = initialState, action: any):MessagesInitialStateType =>{
     switch (action.type) {
         case SEND_MSG:
             const prevID = state.messages[state.messages.length - 1].id;
@@ -42,7 +42,7 @@ const messagesReducer = (state = initialState, action: any):InitialStateType =>{
                 id: prevID + 1,
                 message: action.newMessage,
                 type: 'output'
-            };
+            } as MessageType;
 
             let newState={...state};
             if (!!newMsg.message){
