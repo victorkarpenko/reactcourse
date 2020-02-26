@@ -42,3 +42,10 @@ export type FriendType = {
     id: number,
     name: string
 }
+
+export type UserDataType = {
+    email: string | null,
+    id: number | null,
+    login: string | null,
+    isAuth: boolean | null
+}

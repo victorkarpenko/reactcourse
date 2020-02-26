@@ -1,5 +1,6 @@
 import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {UserDataType} from "../types/types";
 
 
 const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
@@ -32,12 +33,7 @@ const authReducer = (state = initialState, action: any):InitialStateType => {
     }
 };
 
-type UserDataType = {
-    email: string | null,
-    id: number | null,
-    login: string | null,
-    isAuth: boolean | null
-}
+
 
 type SetAuthUserDataActionType = {
     type: typeof SET_USER_DATA,
