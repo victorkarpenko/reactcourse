@@ -1,6 +1,8 @@
 import {profileAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./store";
 
 const ADD_POST = 'socailnetwork/profile/ADD-POST';
 const SET_USER_PROFILE = 'socailnetwork/profile/SET-USER-PROFILE';
@@ -21,7 +23,7 @@ let initialState = {
 export type InitialStateType = typeof initialState;
 
 //reducer
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const prevID = state.posts[state.posts.length - 1].id;
@@ -44,6 +46,8 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
             return state;
     }
 };
+
+type ActionsType = AddPostActionType | SetUserPhotoActionType | SetUserProfileActionType | SetUserStatusActionType | DeletePostActionType ;
 
 type AddPostActionType = {
     type: typeof ADD_POST,
@@ -91,37 +95,41 @@ type DeletePostActionType = {
 
 export const deletePost = (postID: number):DeletePostActionType => ({type: DELETE_POST, postID});
 
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
 //thunk creator
-export const getProfile = (userId: number) => async (dispatch: any) => {
-    let data = await profileAPI.getProfile(userId);
+export const getProfile = (userId: number):ThunkType => async (dispatch) => {
+    const data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 };
 
-export const getStatus = (userId: number) => async (dispatch: any) => {
-    let data = await profileAPI.getStatus(userId);
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
+    const data = await profileAPI.getStatus(userId);
     dispatch(setUserStatus(data));
 };
 
-export const savePhoto = (photo: string) => async (dispatch: any) => {
-    let data = await profileAPI.uploadPhoto(photo);
+export const savePhoto = (photo: string): ThunkType => async (dispatch) => {
+    const data = await profileAPI.uploadPhoto(photo);
     if (data.resultCode === 0) {
         dispatch(setUserPhoto(data.data.photos));
     }
 };
 
-export const saveProfileData = (profileData: ProfileType) => async (dispatch: any, getState: any) => {
-    let data = await profileAPI.saveProfileData(profileData);
+type ThunkFormType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType | FormAction>
+
+export const saveProfileData = (profileData: ProfileType): ThunkFormType => async (dispatch, getState) => {
+    const data = await profileAPI.saveProfileData(profileData);
 
     if (data.resultCode === 0) {
         let profileId = getState().auth.id;
-        dispatch(getProfile(profileId));
+        dispatch(getProfile(profileId as number));
     } else {
-        dispatch(stopSubmit('profileForm', {_error: data.messages[0]}))
+        dispatch(stopSubmit('profileForm', {_error: data.messages[0]}));
         return Promise.reject(data.messages[0]);
     }
 };
 
-export const updStatus = (status: string) => async (dispatch: any) => {
+export const updStatus = (status: string): ThunkType => async (dispatch) => {
     try {
         let data = await profileAPI.updStatus(status);
 

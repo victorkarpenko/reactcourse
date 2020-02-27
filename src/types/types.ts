@@ -47,5 +47,5 @@ export type UserDataType = {
     email: string | null,
     id: number | null,
     login: string | null,
-    isAuth: boolean | null
+    isAuth: boolean
 }

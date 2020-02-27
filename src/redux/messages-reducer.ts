@@ -34,7 +34,7 @@ const initialState ={
 
 export type MessagesInitialStateType = typeof initialState;
 
-const messagesReducer = (state = initialState, action: any):MessagesInitialStateType =>{
+const messagesReducer = (state = initialState, action: ActionsType):MessagesInitialStateType =>{
     switch (action.type) {
         case SEND_MSG:
             const prevID = state.messages[state.messages.length - 1].id;
@@ -56,6 +56,8 @@ const messagesReducer = (state = initialState, action: any):MessagesInitialState
             return state;
     }
 };
+
+type ActionsType = SendMsgActionType;
 
 type SendMsgActionType = {
     type: typeof SEND_MSG,
