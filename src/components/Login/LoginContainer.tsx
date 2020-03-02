@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import Login from "./Login";
 import {login} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/store";
-import {UserDataType} from "../../types/types";
+import {LoginDataType} from "../../types/types";
 
 type PropsType = {
     isAuth: boolean,
@@ -10,7 +10,7 @@ type PropsType = {
 }
 
 type DispatchPropsType = {
-    login: (userData: UserDataType) => void
+    login: (userData: LoginDataType) => void
 }
 
 const mapStateToProps = (state: AppStateType): PropsType =>{

@@ -1,6 +1,6 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, securityAPI, ResultsCodeEnum, ResultsCodeCaptcha} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
-import {UserDataType} from "../types/types";
+import {LoginDataType, UserDataType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
 
@@ -68,19 +68,19 @@ type ThunkFormType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTy
 //thunk creator
 export const checkAuth = (): ThunkType => async (dispatch) => {
     const data = await authAPI.getMe();
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultsCodeEnum.Success) {
         let {id, login, email} = data.data;
         dispatch(setAuthUserData(email, id, login, true));
     }
 };
 
-export const login = (loginData: UserDataType): ThunkFormType => async (dispatch) => {
+export const login = (loginData: LoginDataType): ThunkFormType => async (dispatch) => {
     const data = await authAPI.login(loginData);
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultsCodeEnum.Success) {
         dispatch(checkAuth());
     }
     else{
-        if(data.resultCode === 10) {
+        if(data.resultCode === ResultsCodeCaptcha.CaptchaIsRequired) {
             dispatch(getCaptcha());
         }
         dispatch(stopSubmit('login', {_error: data.messages[0]}))

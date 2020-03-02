@@ -1,4 +1,5 @@
-import * as axios from "axios";
+import axios from "axios";
+import {LoginDataType, ProfileType} from "../types/types";
 
 const instance = axios.create(
     {
@@ -14,21 +15,52 @@ export const usersAPI = {
     getUsers(pageNumber=1, pageSize=10) {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`).then(response => (response.data))
     },
-    follow(userId) {
+    follow(userId: number) {
         return instance.post(`follow/${userId}`).then(response => (response.data));
     },
-    unfollow(userId) {
+    unfollow(userId: number) {
         return  instance.delete(`follow/${userId}`).then(response => (response.data));
     },
 
 };
 
+/*const AuthApiTypes = {
+    me: type
+}*/
+
+export enum ResultsCodeEnum {
+    Success = 0,
+    Error = 1,
+}
+
+export enum ResultsCodeCaptcha {
+    CaptchaIsRequired = 10
+}
+
+type MeResponseType = {
+    data: {
+        email: string,
+        id: number,
+        login: string
+    },
+    resultCode: ResultsCodeEnum,
+    messages: Array<string>
+}
+
+type LoginResponseType = {
+    data: {
+        userId: number,
+    },
+    resultCode: ResultsCodeEnum | ResultsCodeCaptcha,
+    messages: Array<string>
+}
+
 export const authAPI = {
     getMe() {
-        return  instance.get(`auth/me`).then(response => (response.data));
+        return  instance.get<MeResponseType>(`auth/me`).then(response => (response.data));
     },
-    login(loginData){
-        return instance.post(`auth/login`, {...loginData}).then(response => (response.data));
+    login(loginData: LoginDataType){
+        return instance.post<LoginResponseType>(`auth/login`, {...loginData}).then(response => (response.data));
     },
     logout(){
         return instance.delete(`auth/login`).then(response => response.data);
@@ -42,16 +74,16 @@ export const securityAPI = {
 };
 
 export const profileAPI = {
-    getProfile(userId) {
+    getProfile(userId: number) {
         return instance.get(`profile/${userId}`).then(response => (response.data));
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`).then(response => (response.data));
     },
-    updStatus(status) {
+    updStatus(status: string) {
         return instance.put(`profile/status`, {'status': status}).then(response => (response.data));
     },
-    uploadPhoto(photo) {
+    uploadPhoto(photo: string) {
         let formData = new FormData();
         formData.append('image', photo);
 
@@ -61,7 +93,7 @@ export const profileAPI = {
             }
         }).then(response => (response.data));
     },
-    saveProfileData(profileData) {
+    saveProfileData(profileData: ProfileType) {
         return instance.put(`profile`, profileData).then(response => (response.data))
     }
 };

@@ -49,3 +49,10 @@ export type UserDataType = {
     login: string | null,
     isAuth: boolean
 }
+
+export type LoginDataType = {
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha?: string
+}
