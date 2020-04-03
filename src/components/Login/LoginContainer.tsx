@@ -1,25 +1,24 @@
 import {connect} from "react-redux";
 import Login from "./Login";
 import {login} from "../../redux/auth-reducer";
-import {AppStateType} from "../../redux/store";
-import {LoginDataType} from "../../types/types";
-
-type PropsType = {
-    isAuth: boolean,
+import {AppStateType} from "../../redux/store"
+import {LoginDataType} from "../common/FormsControls/FormFields";
+export type PropsTypeLogin = {
+    isAuth: boolean
     captchaUrl: null | string
 }
 
-type DispatchPropsType = {
+export type DispatchPropsTypeLogin = {
     login: (userData: LoginDataType) => void
 }
 
-const mapStateToProps = (state: AppStateType): PropsType =>{
+const mapStateToProps = (state: AppStateType): PropsTypeLogin =>{
     return {
         isAuth: state.auth.isAuth,
         captchaUrl : state.auth.captchaUrl
     }
 };
 
-const LoginContainer = connect<PropsType, DispatchPropsType, {}, AppStateType>(mapStateToProps, {login})(Login);
+const LoginContainer = connect<PropsTypeLogin, DispatchPropsTypeLogin, {}, AppStateType>(mapStateToProps, {login})(Login);
 
 export default LoginContainer;

@@ -1,5 +1,6 @@
 import axios from "axios";
-import {LoginDataType, ProfileType} from "../types/types";
+import {ProfileType} from "../types/types";
+import {LoginDataType} from "../components/common/FormsControls/FormFields";
 
 const instance = axios.create(
     {

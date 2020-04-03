@@ -1,8 +1,10 @@
 import {authAPI, securityAPI, ResultsCodeEnum, ResultsCodeCaptcha} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
-import {LoginDataType, UserDataType} from "../types/types";
+import {UserDataType} from "../types/types";
+
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
+import {LoginDataType} from "../components/common/FormsControls/FormFields";
 
 
 const SET_USER_DATA = 'socailnetwork/auth/SET_USER_DATA';
