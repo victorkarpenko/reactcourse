@@ -23,7 +23,7 @@ let initialState = {
     linksOnPage: 10
 };
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
 //reducer
 const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
