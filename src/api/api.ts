@@ -1,6 +1,7 @@
 import axios from "axios";
 import {ProfileType} from "../types/types";
 import {LoginDataType} from "../components/common/FormsControls/FormFields";
+import {FilterType} from "../redux/users-reducer";
 
 const instance = axios.create(
     {
@@ -13,8 +14,9 @@ const instance = axios.create(
 );
 
 export const usersAPI = {
-    getUsers(pageNumber=1, pageSize=10, term='') {
-        return instance.get(`users?page=${pageNumber}&count=${pageSize}&term=${term}`).then(response => (response.data))
+    getUsers(pageNumber=1, pageSize=10, filter: FilterType) {
+        const {term, friend} = filter;
+        return instance.get(`users?page=${pageNumber}&count=${pageSize}&term=${term}` + (friend===null ? '' : `&friend=${friend}`)).then(response => (response.data))
     },
     follow(userId: number) {
         return instance.post(`follow/${userId}`).then(response => (response.data));
