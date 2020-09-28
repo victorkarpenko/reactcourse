@@ -32,7 +32,10 @@ beforeEach(()=> {
         currentPage: 1,
         isFetching: false,
         followingInProgress: [],
-        linksOnPage: 10
+        linksOnPage: 10,
+        filter: {
+            term: ''
+        }
     }
 });
 

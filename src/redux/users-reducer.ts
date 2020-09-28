@@ -12,6 +12,7 @@ const SET_CURRENT_PAGE = 'socailnetwork/users/SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'socailnetwork/users/SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'socailnetwork/users/TOGGLE-IS-FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'socailnetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
+const SET_FILTER ='socailnetwork/users/SET_FILTER';
 
 let initialState = {
     users: [] as Array<UserType>,
@@ -20,10 +21,15 @@ let initialState = {
     currentPage: 1,
     isFetching: true,
     followingInProgress: [] as Array<number>, //users id
-    linksOnPage: 10
+    linksOnPage: 10,
+    filter: {
+        term: ''
+    }
+
 };
 
 export type InitialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
 
 //reducer
 const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
@@ -40,6 +46,9 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
             };
         case SET_USERS: {
             return {...state, users: [...action.users]};
+        }
+        case SET_FILTER: {
+            return {...state, filter: action.filter}
         }
         case SET_CURRENT_PAGE : {
             return {
@@ -78,6 +87,7 @@ export const actions = {
     unfollowSuccess: (userID: number) => ({type: UNFOLLOW, userID: userID} as const),
     setUsers: (users: Array<UserType>) => ({type: SET_USERS, users: users} as const),
     setCurrentPage: (newCurrentPage: number) => ({type: SET_CURRENT_PAGE, newCurrentPage} as const),
+    setFilter: (term: string) => ({type: SET_FILTER, filter:{term}} as const),
     setTotalUsersCount: (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount} as const),
     toggleIsFetching: (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const),
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const),
@@ -90,10 +100,11 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 type DispatchType = Dispatch<ActionsTypes>;
 
 //thunk creators
-export const requestUsers = (page: number, pageSize: number): ThunkType => async (dispatch) => {
+export const requestUsers = (page: number, pageSize: number, term: string): ThunkType => async (dispatch) => {
     dispatch(actions.toggleIsFetching(true));
+    dispatch(actions.setFilter(term));
 
-    const data = await usersAPI.getUsers(page, pageSize);
+    const data = await usersAPI.getUsers(page, pageSize, term);
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount));
