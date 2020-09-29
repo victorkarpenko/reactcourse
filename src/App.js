@@ -1,10 +1,10 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
-import UsersContainer from "./components/Users/UsersContainer";
+import UsersPage from "./components/Users/UsersPage";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginContainer from "./components/Login/LoginContainer";
+import Login from "./components/Login/Login";
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
@@ -44,8 +44,8 @@ class App extends React.Component {
                         <Route path='/dialogs'
                                render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/> </Suspense>}/>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                        <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/users' render={() => <UsersPage/>}/>
                         <Redirect exact from="/" to="/profile" />
                         <Route path='*' render={() => <div className="error-page"><span>404</span> <div>not found</div></div>}/>
 

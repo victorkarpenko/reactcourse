@@ -6,7 +6,9 @@ import {Button, Checkbox, Input, LoginDataType} from "../common/FormsControls/Fo
 import {emailValidation, requiredField} from "../../utils/validators/validators";
 import {Redirect} from "react-router-dom";
 import classes from '../common/FormsControls/FormControls.module.css'
-import {DispatchPropsTypeLogin, PropsTypeLogin} from "./LoginContainer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
+import {login} from "../../redux/auth-reducer";
 
 type LoginFormProps = {
     captchaUrl: string | null
@@ -14,16 +16,19 @@ type LoginFormProps = {
 
 const LoginForm: React.FC<InjectedFormProps<LoginDataType, LoginFormProps> & LoginFormProps> = ({handleSubmit, error, captchaUrl}) => {
 
-    return(
+    return (
         <form onSubmit={handleSubmit} className={c.loginForm}>
-            <Field component={Input} validate={emailValidation} name={'email'} type="text" placeholder="Login" />
-            <Field component={Input} validate={requiredField} type={"password"} placeholder={"Password"} name={'password'}/>
+            <Field component={Input} validate={emailValidation} name={'email'} type="text" placeholder="Login"/>
+            <Field component={Input} validate={requiredField} type={"password"} placeholder={"Password"}
+                   name={'password'}/>
             <Field id={'rememberMe'} component={Checkbox} name={'rememberMe'} label={'Remember me'}/>
             {
                 error && <div className={classes.helpBlock + ' ' + classes.hasError}>{error}</div>
             }
             {
-                captchaUrl && <><img src={captchaUrl} alt=""/>   <Field validate={requiredField} component={Input} type="text" name={'captcha'} placeholder={'Enter symbols from email'}/></>
+                captchaUrl && <><img src={captchaUrl} alt=""/> <Field validate={requiredField} component={Input}
+                                                                      type="text" name={'captcha'}
+                                                                      placeholder={'Enter symbols from email'}/></>
             }
             <Button label={'Login'}/>
         </form>
@@ -32,21 +37,26 @@ const LoginForm: React.FC<InjectedFormProps<LoginDataType, LoginFormProps> & Log
 
 const ReduxLoginForm = reduxForm<LoginDataType, LoginFormProps>({form: 'login'})(LoginForm);
 
+const Login: React.FC = (props) => {
 
-const Login: React.FC<PropsTypeLogin & DispatchPropsTypeLogin> = (props) => {
+    const captchaUrl = useSelector((state: AppStateType) => (state.auth.captchaUrl));
+    const isAuth = useSelector((state: AppStateType) => (state.auth.isAuth));
+
+    const dispatch = useDispatch();
+
     const onSubmit = (formData: LoginDataType) => {
-        props.login(formData);
+        dispatch(login(formData));
     };
 
-    if (props.isAuth) {
-        return <Redirect to={'/profile'} />
+    if (isAuth) {
+        return <Redirect to={'/profile'}/>
     } else {
-    return(
-        <div className={c.loginPage}>
-           <h1>Login</h1>
-            <ReduxLoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
-        </div>
-    )
+        return (
+            <div className={c.loginPage}>
+                <h1>Login</h1>
+                <ReduxLoginForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
+            </div>
+        )
     }
 };
 
