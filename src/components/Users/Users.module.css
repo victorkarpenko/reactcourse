@@ -2,8 +2,24 @@
     padding: 30px;
 }
 
-.users__form{
+.users__form_wrp{
     padding: 30px 30px 0;
+
+}
+
+.users__form{
+    display: flex;
+}
+
+.users__form input,
+.users__form select{
+    max-width: 250px;
+    margin-right: 10px;
+}
+
+.users__form button{
+    max-width: 150px;
+    height: 34px;
 }
 
 .user{

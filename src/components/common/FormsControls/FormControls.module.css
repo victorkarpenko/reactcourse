@@ -27,7 +27,8 @@
     border-radius: 8px;
 }
 
-.input{
+.input,
+.select{
     background: #f8f9fa;
     border: 1px solid #dde4e7;
     border-radius: 5px;
@@ -38,6 +39,11 @@
     font-style: italic;
     height: 34px;
     width: 100%;
+}
+
+.select{
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .checkbox{
