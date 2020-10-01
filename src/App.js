@@ -1,8 +1,8 @@
 import React, {Suspense} from 'react';
 import './App.css';
-import NavbarContainer from "./components/Navbar/NavbarContainer";
+import Navbar from "./components/Navbar/Navbar";
 import UsersPage from "./components/Users/UsersPage";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
@@ -36,7 +36,7 @@ class App extends React.Component {
         } else return (
             <div className="App">
                 <HeaderContainer/>
-                <NavbarContainer/>
+                <Navbar/>
 
                 <div className="main">
                     <Switch>

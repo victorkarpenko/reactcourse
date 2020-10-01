@@ -1,9 +1,10 @@
 import React, {useState, useEffect, ChangeEvent} from 'react';
 import c from './ProfileInfo.module.css'
+import {useDispatch} from "react-redux";
+import {updStatus} from "../../../redux/profile-reducer";
 
 type PropsType = {
     userStatus: string,
-    updStatus: (newStatus: string) => void,
     isOwner: boolean
 }
 
@@ -12,6 +13,8 @@ const ProfileStatusHooks: React.FC<PropsType> = (props) => {
     const [editMode, setEditMode] = useState(false);
 
     const [status, setStatus] = useState(props.userStatus);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setStatus(props.userStatus)
@@ -23,7 +26,7 @@ const ProfileStatusHooks: React.FC<PropsType> = (props) => {
 
     const deactivateEditMode = () => {
         if(props.userStatus !== status){
-            props.updStatus(status);
+            dispatch(updStatus(status));
         }
         setEditMode(!editMode);
     };

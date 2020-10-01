@@ -7,6 +7,8 @@ import ProfileStatusHooks from "./ProfileStatusHooks";
 import editBtn from "../../../assets/images/edit-button.svg"
 import ProfileDataForm from "./ProfileDataForm";
 import {ProfileType, ContactsType} from "../../../types/types";
+import {updStatus} from "../../../redux/profile-reducer";
+import {useDispatch} from "react-redux";
 
 type InfoProps = {
     isOwner: boolean,
@@ -14,11 +16,11 @@ type InfoProps = {
     saveProfileData: (profileData: any) => any,
     userProfile: ProfileType,
     userStatus: string,
-    updStatus: (status: string) => void,
 }
 
 const ProfileInfo: React.FC<InfoProps> = (props) => {
     const [editMode, setEditMode] = React.useState(false);
+
 
     const onPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -51,7 +53,7 @@ const ProfileInfo: React.FC<InfoProps> = (props) => {
                 </div>
 
                 <div className={c.userProfile__info}>
-                    <ProfileStatusHooks isOwner={props.isOwner} updStatus={props.updStatus}
+                    <ProfileStatusHooks isOwner={props.isOwner}
                                         userStatus={props.userStatus}/>
 
                     {editMode ? <ProfileDataForm cancelEdit={cancelEdit} userProfile={props.userProfile} initialValues={props.userProfile}

@@ -2,13 +2,13 @@ import React from 'react';
 import classes from './navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
-import {FriendType} from "../../types/types";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
 
-type Props = {
-    friends: Array<FriendType>
-}
 
-const Navbar: React.FC<Props> = (props) => {
+const Navbar: React.FC = (props) => {
+    const friends = useSelector((state: AppStateType) => (state.sidebar.friends));
+
     return(
         <aside className={classes.sidebar}>
             <nav className={classes.navigation}>
@@ -16,7 +16,7 @@ const Navbar: React.FC<Props> = (props) => {
                 <NavLink to="/dialogs" className={classes.item} activeClassName={classes.active}>Dialogs</NavLink>
                 <NavLink to="/users" className={classes.item} activeClassName={classes.active}>Users</NavLink>
             </nav>
-            <Friends friends={props.friends}/>
+            <Friends friends={friends}/>
         </aside>
     )
 };
